@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/18 14:39:08 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:30:44 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ class random_access_iterator
         bool &operarar==(const random_access_iterator &rhs) {return p == rhs.p;};
         bool &operarar!=(const random_access_iterator &rhs) {return p != rhs.p;};
         reference operator*(const random_access_iterator &rhs) {return (*p);};
+        pointer operator->(void) {return &(operarar*());};
         random_access_iterator &operator++(void) {++p; return (*this);};
-        random_access_iterator operator++(int) (random_access_iterator tmp = *this; --p; retrun (tmp););
-        random_access_iterator &operator--(void) {++p; return (*this);};
-        random_access_iterator operator--(int) (random_access_iterator tmp = *this; --p; retrun (tmp););
+        random_access_iterator operator++(int) (random_access_iterator tmp = *this; ++p; return (tmp););
+        random_access_iterator &operator--(void) --p; return (*this);{};
+        random_access_iterator operator--(int) (random_access_iterator tmp = *this; --p; return (tmp););
         random_access_iterator &operator-=(int n)(p -= n;return (*this););
         random_access_iterator &operator+=(int n)(p += n;return (*this););
         random_access_iterator operator-(int n){(return (random_access_iterator(p - n));)};
