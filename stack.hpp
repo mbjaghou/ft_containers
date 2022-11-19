@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:18:44 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/19 12:04:18 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:17:47 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ class stack
         size_type size() const{return (c.size());}
         void push( const value_type& value ){c.push_back(value);}
         void pop(){c.pop_back();}
+        template <class U, class C> friend bool operator== (const stack<U,C>& lhs, const stack<U,C>& rhs) {
+			return lhs.c == rhs.c;
+		}
+		template <class U, class C> friend bool operator!= (const stack<U,C>& lhs, const stack<U,C>& rhs) {
+			return lhs.c != rhs.c;
+		}
+		template <class U, class C> friend bool operator< (const stack<U,C>& lhs, const stack<U,C>& rhs) {
+			return lhs.c < rhs.c;
+		}
+		template <class U, class C> friend bool operator<= (const stack<U,C>& lhs, const stack<U,C>& rhs) {
+			return lhs.c <= rhs.c;
+		}
+		template <class U, class C> friend bool operator> (const stack<U,C>& lhs, const stack<U,C>& rhs) {
+			return lhs.c > rhs.c;
+		}
+		template <class U, class C> friend bool operator>= (const stack<U,C>& lhs, const stack<U,C>& rhs) {
+			return lhs.c >= rhs.c;
+		}
         
     protected:
         container_type c;
