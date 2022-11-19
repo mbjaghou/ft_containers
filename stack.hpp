@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:18:44 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/19 12:17:47 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:26:39 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ class stack
         typedef typename    Container::size_type        size_type;
         typedef typename    Container::reference        reference;
         typedef typename    Container::const_reference  const_reference;
-        stack(){};
         stack( const stack& other ){*this = other;}
         explicit stack( const Container& cont = Container() ) : c(cont){}
         stack &operator=(const stack &obj) {this->c = obj.c; return (*this);}
-        ~stack();
+        ~stack(){}
         reference top(){return (c.back());}
         const_reference top() const{return (c.back());}
         bool empty() const{return (c.empty());}
