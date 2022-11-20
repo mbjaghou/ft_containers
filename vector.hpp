@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/20 13:50:56 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:25:29 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ class vector
             {
                 pointer tmp_p = _alloc.allocate(new_cap);
                 if (!tmp_p)
-                    std::bad_alloc("Bad allocation");
+                    std::bad_alloc();
+                for (size_type i = 0; i < _size; i++)
+                    _alloc.construct(tmp_p + i, p[i]);
+                for (size_type i = 0; i < _size; i++)
+                    _alloc.destroy(this->p + i);
+                _alloc.dellocator(this->p , this->_capacity);
+                this->p = tmp_p;
+                this->_capacity = new_cap;
             }
-            for (size_type i = 0; i < _size; i++)
-                _alloc.construct(tmp_p + i, p[i]);
-            for (size_type i = 0; i < _size; i++)
-                _alloc.destroy(this->p + i);
-            _alloc.dellocator(this->p , this->_capacity);
-            this->p = tmp_p;
-            this->_capacity = new_cap;
         }
   
     private:
