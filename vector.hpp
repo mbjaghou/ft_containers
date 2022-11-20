@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/20 11:32:46 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:50:56 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,26 @@ class vector
             return (0);
         }
         size_type size() const{return (this->_size);}
-        size_type max_size() const{}
-        void reserve( size_type new_cap ){}
+        size_type max_size() const{return (_alloc.max_size());}
         size_type capacity() const{return (this->_capacity);};
+        void reserve( size_type new_cap )
+        {
+            if (new_cap > max_size())
+                std::length_error("no spase left");
+            else if (new_cap > _capacity)
+            {
+                pointer tmp_p = _alloc.allocate(new_cap);
+                if (!tmp_p)
+                    std::bad_alloc("Bad allocation");
+            }
+            for (size_type i = 0; i < _size; i++)
+                _alloc.construct(tmp_p + i, p[i]);
+            for (size_type i = 0; i < _size; i++)
+                _alloc.destroy(this->p + i);
+            _alloc.dellocator(this->p , this->_capacity);
+            this->p = tmp_p;
+            this->_capacity = new_cap;
+        }
   
     private:
         size_type           _size;
