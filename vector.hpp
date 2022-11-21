@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/21 11:35:45 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:37:44 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include <iostream>
 #include <stddef.h>
 #include "iterator.hpp"
+#include "is_integral.hpp"
 
-
+namespace ft{
 template <class T, class Allocator = std::allocator<T> > 
 class vector
 {
@@ -35,13 +36,51 @@ class vector
         typedef ft::reverse_iterator<value_type>                    reverse_iterator;
         typedef ft::reverse_iterator<const value_type>              const_reverse_iterator;
         /*--------Member functions-----*/
-        explicit vector (const allocator_type& alloc = allocator_type()){}
-        explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()){}
+        explicit vector (const allocator_type& alloc = allocator_type()) : p(NULL), _capacity(0), _size(0), _alloc(0){}
+        explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+        {
+            _size = n;
+            _capacity = n;
+            _alloc = alloc;
+            p = _alloc.allocate(n);
+            for (size_type i = 0; i < n; ++i)
+                _alloc.construct(p + i, val);
+        }
         template <class InputIterator>
-            vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){}
-        vector (const vector& x){}
-        ~vector(){}
-        vector& operator=( const vector& other ){}
+            vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+            {
+
+                _size = std::distance(first, last);
+                _capacity = _size;
+                _alloc = alloc;
+                p = _alloc.allocate(_size);
+                size_type i = 0;
+                while(first != last)
+                {
+                    _alloc.construct(p + i, *first);
+                    ++first;
+                    ++i;
+                }
+            }
+        ~vector()
+        {
+            for (size_type i = 0; i < _size; i++)
+                _alloc.destroy(p + i);
+            if (_capacity != 0)
+                _alloc.deallocate(p, _capacity);
+        }
+        vector (const vector& x){
+            *this = x;
+        }
+        vector& operator=( const vector& other )
+        {
+            p = other.p;
+            _capacity = other._capacity;
+            _size = other._size;
+            _alloc = other._alloc;
+            return (*this);
+        }
         allocator_type get_allocator() const{return (this->_alloc);}
         /*--------Iterators-----*/
         iterator begin(){return (iterator(p));}
@@ -103,14 +142,14 @@ class vector
         /*--------Element access-----*/
         reference at( size_type pos )
         {
-            if !(pos < size())
-               throw std::out_of_range();
+            if (!(pos < size()))
+               throw std::out_of_range("out of range");
             return (p[pos]);
         }
         const_reference at( size_type pos ) const
         {
-            if !(pos < size())
-                throw std::out_of_range();
+            if (!(pos < size()))
+                throw std::out_of_range("out of range");
             return (p[pos]);
         }
         reference operator[]( size_type pos ){return (p[pos]);}
@@ -127,4 +166,5 @@ class vector
         pointer             p;
         allocator_type      _alloc;
 };
+}
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:11:25 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/20 18:12:00 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:24:32 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ namespace ft
 {
 template <class T, T v>struct integral_constant 
 {
-  static  T                         value = v;
+  static  const T                         value = v;
   typedef T                         value_type;
   typedef integral_constant<T,v>    type;
     operator T() { return v; }

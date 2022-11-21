@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/19 11:09:49 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:43:18 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ class random_access_iterator
         random_access_iterator(pointer pp) : p(pp){}
         ~random_access_iterator(){}
         random_access_iterator(const random_access_iterator &obj){*this = obj;}
-        pointer base(){return (this->p);}
+        pointer base() const {return (this->p);}
         random_access_iterator &operator=(const random_access_iterator &obj){p = obj.p;return (*this);}
-        bool &operator==(const random_access_iterator &rhs) {return p == rhs.p;}
-        bool &operator!=(const random_access_iterator &rhs) {return p != rhs.p;}
-        reference operator*(const random_access_iterator &rhs) {return (*p);}
+        reference operator*() {return (*p);}
         pointer operator->(void) {return &(operator*());}
         random_access_iterator &operator++(void) {++p; return (*this);}
         random_access_iterator operator++(int) {random_access_iterator tmp = *this; ++p; return (tmp);}
@@ -49,9 +47,17 @@ class random_access_iterator
         random_access_iterator operator-(int n){return (random_access_iterator(p - n));}
         random_access_iterator operator+(int n){return (random_access_iterator(p + n));}
         reference operator[](int n) {return(p[n]);}
+        	operator random_access_iterator<const T> () const {
+				return (random_access_iterator<const T>(p));
+			}
         private:
             pointer p;
 };
+
+	template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator-( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
+		return (lhs.base() - rhs.base());
+	}
+
 
 template <class it1, class it2>
     bool operator<(const random_access_iterator<it1> &rhs, const random_access_iterator<it2> &rhs1)
