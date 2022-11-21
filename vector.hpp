@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/20 14:25:29 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/21 11:35:45 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ class vector
         void reserve( size_type new_cap )
         {
             if (new_cap > max_size())
-                std::length_error("no spase left");
+                throw std::length_error("no spase left");
             else if (new_cap > _capacity)
             {
                 pointer tmp_p = _alloc.allocate(new_cap);
                 if (!tmp_p)
-                    std::bad_alloc();
+                    throw std::bad_alloc();
                 for (size_type i = 0; i < _size; i++)
                     _alloc.construct(tmp_p + i, p[i]);
                 for (size_type i = 0; i < _size; i++)
@@ -79,7 +79,48 @@ class vector
                 this->_capacity = new_cap;
             }
         }
-  
+        /*--------Modifiers-----*/
+        void clear(){}
+        template <class InputIterator>
+            void assign (InputIterator first, InputIterator last){}
+        void assign (size_type n, const value_type& val){}
+        iterator insert (iterator position, const value_type& val){}
+        void insert (iterator position, size_type n, const value_type& val){}
+        template <class InputIterator>    
+            void insert (iterator position, InputIterator first, InputIterator last){}
+        iterator erase( iterator pos ){}
+        iterator erase( iterator first, iterator last ){}
+        void push_back( const T& value )
+        {
+            
+        }
+        void pop_back(){}
+        void resize( size_type count, T value = T() ){}
+        void swap( vector& other )
+        {
+            
+        }
+        /*--------Element access-----*/
+        reference at( size_type pos )
+        {
+            if !(pos < size())
+               throw std::out_of_range();
+            return (p[pos]);
+        }
+        const_reference at( size_type pos ) const
+        {
+            if !(pos < size())
+                throw std::out_of_range();
+            return (p[pos]);
+        }
+        reference operator[]( size_type pos ){return (p[pos]);}
+        const_reference operator[]( size_type pos ) const{return (p[pos]);}
+        reference front(){return (this->at(0));}
+        const_reference front() const{return (this->at(0));}
+        reference back(){return (this->at(_size - 1));}
+        const_reference back() const{return (this->at(_size - 1));}
+        T* data(){return (p);}
+        const T* data() const{return (p);}
     private:
         size_type           _size;
         size_type           _capacity;
