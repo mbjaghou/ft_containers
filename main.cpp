@@ -28,4 +28,10 @@ int main() {
         std::cout << vect2[i] << ' ';
     }
     std::cout <<'\n';
+    std::cout << "test only\n";
+    vect2.assign(vect.begin(), vect.end());
+    for (size_t i = 0; i < vect2.size(); ++i) {
+        std::cout << vect2[i] << ' ';
+    }
+    std::cout <<'\n';
 }

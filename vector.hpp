@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/21 13:37:44 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:53:57 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,22 +119,76 @@ class vector
             }
         }
         /*--------Modifiers-----*/
-        void clear(){}
+        void clear()
+        {
+            for (size_type  i = 0; i < _size; ++i)
+                _alloc.destroy(p + i);
+        }
         template <class InputIterator>
-            void assign (InputIterator first, InputIterator last){}
-        void assign (size_type n, const value_type& val){}
-        iterator insert (iterator position, const value_type& val){}
-        void insert (iterator position, size_type n, const value_type& val){}
+            void assign (InputIterator first, InputIterator last , 
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+            {
+                size_type n = std::distance(first, last);
+                if (n > _capacity)
+                    _capacity = _capacity * 2;
+                for (size_type  i = 0; i < _size; ++i)
+                    _alloc.destroy(p + i);
+                size_type i = 0;
+                while(first != last)
+                {
+                    _alloc.construct(p + i, *first);
+                    i++;
+                    first++;
+                }
+                _size = n;
+            }
+        void assign (size_type n, const value_type& val)
+        {
+            if (n > _capacity)
+                _capacity = _capacity * 2;
+            for (size_type  i = 0; i < _size; ++i)
+                _alloc.destroy(p + i);
+            size_type i = 0;
+            while(i < n)
+            {
+                _alloc.construct(p + i, val);
+                i++;
+            }
+            _size = n;
+        }
+        iterator insert (iterator position, const value_type& val)
+        {
+            
+        }
+        void insert (iterator position, size_type n, const value_type& val)
+        {
+            
+        }
         template <class InputIterator>    
-            void insert (iterator position, InputIterator first, InputIterator last){}
-        iterator erase( iterator pos ){}
-        iterator erase( iterator first, iterator last ){}
+            void insert (iterator position, InputIterator first, InputIterator last)
+            {
+                
+            }
+        iterator erase( iterator pos )
+        {
+            
+        }
+        iterator erase( iterator first, iterator last )
+        {
+            
+        }
         void push_back( const T& value )
         {
             
         }
-        void pop_back(){}
-        void resize( size_type count, T value = T() ){}
+        void pop_back()
+        {
+            
+        }
+        void resize( size_type count, T value = T() )
+        {
+            
+        }
         void swap( vector& other )
         {
             
