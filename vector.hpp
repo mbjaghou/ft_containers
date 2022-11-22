@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/21 16:53:57 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:32:27 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class vector
         typedef ft::reverse_iterator<value_type>                    reverse_iterator;
         typedef ft::reverse_iterator<const value_type>              const_reverse_iterator;
         /*--------Member functions-----*/
-        explicit vector (const allocator_type& alloc = allocator_type()) : p(NULL), _capacity(0), _size(0), _alloc(0){}
+        explicit vector (const allocator_type& alloc = allocator_type()) : p(NULL), _capacity(0), _size(0), _alloc(alloc){}
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
             _size = n;
@@ -113,7 +113,7 @@ class vector
                     _alloc.construct(tmp_p + i, p[i]);
                 for (size_type i = 0; i < _size; i++)
                     _alloc.destroy(this->p + i);
-                _alloc.dellocator(this->p , this->_capacity);
+                _alloc.deallocate(this->p , this->_capacity);
                 this->p = tmp_p;
                 this->_capacity = new_cap;
             }
@@ -177,32 +177,48 @@ class vector
         {
             
         }
-        void push_back( const T& value )
-        {
-            
-        }
-        void pop_back()
-        {
-            
-        }
         void resize( size_type count, T value = T() )
         {
             
         }
+        void push_back( const T& value )
+        {
+            if (!_capacity)
+                reserve(1);
+            if (_size + 1 > _capacity)
+                reserve(_capacity * 2);
+            _alloc.construct(p + _size, value);
+            _size++;
+        }
+        void pop_back()
+        {
+            _alloc.destroy(p + _size);
+            _size--;
+        }
         void swap( vector& other )
         {
-            
+            size_type tmps = _size;
+            _size = other._size;
+            other._size = tmps;
+
+            size_type tmpc = _capacity;
+            _capacity = other._capacity;
+            other._capacity = tmpc;
+
+            pointer tmpp = p;
+            p = other.p;
+            other.p = tmpp;
         }
         /*--------Element access-----*/
         reference at( size_type pos )
         {
-            if (!(pos < size()))
+            if (pos >= size())
                throw std::out_of_range("out of range");
             return (p[pos]);
         }
         const_reference at( size_type pos ) const
         {
-            if (!(pos < size()))
+            if (pos >= size())
                 throw std::out_of_range("out of range");
             return (p[pos]);
         }
