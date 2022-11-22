@@ -49,4 +49,23 @@ int main() {
     for (size_t i = 0; i < vect3.size(); ++i)
         std::cout << vect3[i] << std::endl;
     std::cout << vect3.capacity() << std::endl;
+    std::cout <<"test resize\n\n\n\n";
+    ft::vector<int> ob;
+
+    ob.push_back(1);
+    ob.push_back(1);
+    ob.push_back(1);
+    ob.push_back(1);
+    ob.push_back(1);
+
+    for (size_t i = 0; i < ob.size(); i++)
+    {
+        std::cout << ob[i] << "\n\n";
+    }
+    ob.resize(8);
+    std::cout << "after resize" << "\n\n";
+    for (size_t i = 0; i < ob.size(); i++)
+    {
+        std::cout << ob[i] << "\n";
+    }
 }

@@ -179,7 +179,22 @@ class vector
         }
         void resize( size_type count, T value = T() )
         {
-            
+                if (count > max_size())
+					throw std::length_error("Length Error");
+				else if (count < _size)
+				{
+					for (size_type i = count; i < _size; i++)
+						_alloc.destroy(p + i);
+					_size = count;
+				} 
+				else 
+				{
+					if (count > _capacity)
+						reserve(count);
+					for (size_type i = _size; i < count; i++)
+						_alloc.construct(p + i, value);
+					_size = count;
+				}
         }
         void push_back( const T& value )
         {
