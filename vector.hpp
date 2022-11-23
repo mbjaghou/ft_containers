@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/23 18:01:45 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:24:10 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,7 @@ class vector
         }
         void insert (iterator position, size_type n, const value_type& val)
         {
-            std::cout << "hello \n";
-            if (_size + 1 > _capacity) {
+            if (n > _capacity) {
                 _capacity = _capacity * 2;
                 reserve(_capacity);
             }

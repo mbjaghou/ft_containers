@@ -81,7 +81,7 @@ int main() {
 
     ft::vector<int> obj1(10, 24);
 
-    obj1.insert(obj1.begin() + 2, 10, 8);
+    obj1.insert(obj1.begin() + 2, 100, 8);
     for(size_t i = 0; i < obj1.size(); ++i)
         std::cout << obj1[i] << " " << std::endl;
 
