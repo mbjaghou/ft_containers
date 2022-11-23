@@ -68,4 +68,22 @@ int main() {
     {
         std::cout << ob[i] << "\n";
     }
+
+    std::cout << "test assign\n";
+
+    ft::vector<int> obj2(10, 24);
+
+    obj2.assign(1, 8);
+    for(size_t i = 0; i < obj2.size(); ++i)
+        std::cout << obj2[i] << " " << std::endl;
+
+    std::cout << "test insert\n";
+
+    ft::vector<int> obj1(10, 24);
+
+    obj1.insert(obj1.begin() + 2, 10, 8);
+    for(size_t i = 0; i < obj1.size(); ++i)
+        std::cout << obj1[i] << " " << std::endl;
+
+
 }

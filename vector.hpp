@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/22 14:32:27 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:01:45 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,9 @@ class vector
             typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
             {
                 size_type n = std::distance(first, last);
-                if (n > _capacity)
-                    _capacity = _capacity * 2;
                 for (size_type  i = 0; i < _size; ++i)
                     _alloc.destroy(p + i);
+                reserve(n);
                 size_type i = 0;
                 while(first != last)
                 {
@@ -144,8 +143,7 @@ class vector
             }
         void assign (size_type n, const value_type& val)
         {
-            if (n > _capacity)
-                _capacity = _capacity * 2;
+            reserve(n);
             for (size_type  i = 0; i < _size; ++i)
                 _alloc.destroy(p + i);
             size_type i = 0;
@@ -158,17 +156,44 @@ class vector
         }
         iterator insert (iterator position, const value_type& val)
         {
-            
+            if (_size + 1 > _capacity) {
+                _capacity = _capacity * 2;
+                reserve(_capacity);
+            }
+            size_t o = std::distance(position, end());
+            vector<value_type> tmp;
+            tmp.assign(position, end());
+            for (size_t i = o; i < _size; ++i)
+                _alloc.destroy(p + i);
+            _size -= o;
+            push_back(val);
+            for(size_t i = 0; i < tmp.size(); ++i, ++_size)
+                _alloc.construct(p + _size, tmp[i]);
+            return (position);
         }
         void insert (iterator position, size_type n, const value_type& val)
         {
-            
-        }
-        template <class InputIterator>    
-            void insert (iterator position, InputIterator first, InputIterator last)
-            {
-                
+            std::cout << "hello \n";
+            if (_size + 1 > _capacity) {
+                _capacity = _capacity * 2;
+                reserve(_capacity);
             }
+            size_t o = std::distance(position, end());
+            vector<value_type> tmp;
+            tmp.assign(position, end());
+            for (size_t i = o; i < _size; ++i)
+                _alloc.destroy(p + i);
+            _size -= o;
+            for (size_t i = 0; i < n; ++i)
+                push_back(val);
+            for(size_t i = 0; i < tmp.size(); ++i, ++_size)
+                _alloc.construct(p + _size, tmp[i]);
+        }
+        // template <class InputIterator>    
+        //     void insert (iterator position, InputIterator first, InputIterator last)
+        //     {
+  
+        //     }
         iterator erase( iterator pos )
         {
             
@@ -179,22 +204,22 @@ class vector
         }
         void resize( size_type count, T value = T() )
         {
-                if (count > max_size())
-					throw std::length_error("Length Error");
-				else if (count < _size)
-				{
-					for (size_type i = count; i < _size; i++)
-						_alloc.destroy(p + i);
-					_size = count;
-				} 
-				else 
-				{
-					if (count > _capacity)
-						reserve(count);
-					for (size_type i = _size; i < count; i++)
-						_alloc.construct(p + i, value);
-					_size = count;
-				}
+            if (count > max_size())
+				throw std::length_error("Length Error");
+			else if (count < _size)
+			{
+				for (size_type i = count; i < _size; i++)
+					_alloc.destroy(p + i);
+				_size = count;
+			} 
+			else 
+			{
+				if (count > _capacity)
+					reserve(count);
+				for (size_type i = _size; i < count; i++)
+					_alloc.construct(p + i, value);
+				_size = count;
+			}
         }
         void push_back( const T& value )
         {
