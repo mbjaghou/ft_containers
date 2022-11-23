@@ -173,10 +173,10 @@ class vector
         }
         void insert (iterator position, size_type n, const value_type& val)
         {
-		    if (n + _capacity < (_capacity * 2))
-					reserve(_size + n);
-			else if (!_size)
-					reserve(n);
+		if (n + _capacity < (_capacity * 2))
+			reserve(_size + n);
+		else if (!_size)
+			reserve(n);
             size_t o = std::distance(position, end());
             vector<value_type> tmp;
             tmp.assign(position, end());
