@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/24 11:09:23 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:26:44 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,28 @@ class vector
             for(size_t i = 0; i < tmp.size(); ++i, ++_size)
                 _alloc.construct(p + _size, tmp[i]);
         }
-        // template <class InputIterator>    
-        //     void insert (iterator position, InputIterator first, InputIterator last)
-        //     {
-  
-        //     }
+        template <class InputIterator>    
+            void insert (iterator position, InputIterator first, InputIterator last, 
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+            {
+                size_type d = std::distance(first, last);
+                size_type o = std::distance(begin(), position);
+                vector<value_type> tmp;
+                tmp.assign(position, end());
+                if (d + _size > _capacity)
+                    reserve(d + _size);
+                for (size_type i = o; i < _size; ++i)
+                    _alloc.destroy(p + i);
+                _size = o;
+                while(first != last)
+                {
+                    _alloc.construct(p + _size, *first);
+                    ++_size;
+                     ++first;
+                }
+                for(size_t i = 0; i < tmp.size(); ++i, ++_size)
+                    _alloc.construct(p + _size, tmp[i]);                
+            }
         iterator erase( iterator pos )
         {
             

@@ -80,8 +80,9 @@ int main() {
     std::cout << "test insert\n";
 
     ft::vector<int> obj1(10, 24);
+    ft::vector<int> obj8(15, 5);
 
-    obj1.insert(obj1.begin() + 10, 1000, 8);
+    obj1.insert(obj1.begin() + 1 , obj8.begin() , obj8.end());
     for(size_t i = 0; i < obj1.size(); ++i)
         std::cout << obj1[i] << " " << std::endl;
 
