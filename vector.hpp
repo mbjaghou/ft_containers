@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/23 19:24:10 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:09:23 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <stddef.h>
 #include "iterator.hpp"
 #include "is_integral.hpp"
+
+#include "distance.hpp"
 
 namespace ft{
 template <class T, class Allocator = std::allocator<T> > 
@@ -173,13 +175,13 @@ class vector
         }
         void insert (iterator position, size_type n, const value_type& val)
         {
-	    if (n + _capacity < (_capacity * 2))
-		reserve(_size + n);
-	    else if (!_size)
-		reserve(n);
-            size_t o = std::distance(position, end());
+            difference_type o = std::distance(position, end());
             vector<value_type> tmp;
             tmp.assign(position, end());
+	        if (n + _size > _capacity)
+		        reserve(n + _size);
+	        else if (!_size)
+		        reserve(n);
             for (size_t i = o; i < _size; ++i)
                 _alloc.destroy(p + i);
             _size -= o;
@@ -224,7 +226,7 @@ class vector
         {
             if (!_capacity)
                 reserve(1);
-            if (_size + 1 > _capacity)
+            else if (_size + 1 > _capacity)
                 reserve(_capacity * 2);
             _alloc.construct(p + _size, value);
             _size++;
