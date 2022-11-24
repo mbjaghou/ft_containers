@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:18:44 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/19 12:26:39 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:01:05 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include "vector.hpp"
 
 namespace ft
 {
-template<class T, class Container = std::vector<T> > 
+template<class T, class Container = ft::vector<T> > 
 class stack
 {
     public:

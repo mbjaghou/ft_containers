@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/24 13:26:44 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:04:50 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ class vector
         {
             for (size_type i = 0; i < _size; i++)
                 _alloc.destroy(p + i);
-            if (_capacity != 0)
+            if (_capacity == 0)
                 _alloc.deallocate(p, _capacity);
         }
         vector (const vector& x){
@@ -180,8 +180,6 @@ class vector
             tmp.assign(position, end());
 	        if (n + _size > _capacity)
 		        reserve(n + _size);
-	        else if (!_size)
-		        reserve(n);
             for (size_t i = o; i < _size; ++i)
                 _alloc.destroy(p + i);
             _size -= o;
@@ -214,11 +212,23 @@ class vector
             }
         iterator erase( iterator pos )
         {
-            
+            iterator tmpos = pos;
+            while (tmpos != end())
+            {
+                *tmpos = *(tmpos + 1);
+                tmpos++;
+            }
+            _size--;
+            return (pos);
         }
         iterator erase( iterator first, iterator last )
         {
-            
+            while (first != last)
+            {
+                erase(first);
+                last--;
+            }
+            return (first);
         }
         void resize( size_type count, T value = T() )
         {

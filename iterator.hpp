@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/22 11:39:25 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:36:58 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ class random_access_iterator
 	template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator-( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
 		return (lhs.base() - rhs.base());
 	}
+    	template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator+( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
+		return (lhs.base() + rhs.base());
+	}
+
 
 
 template <class it1, class it2>
