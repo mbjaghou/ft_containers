@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/24 17:26:49 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:41:37 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include <stddef.h>
 #include "iterator.hpp"
 #include "is_integral.hpp"
-
+#include "equal.hpp"
+#include "lexicographical_compare.hpp"
 #include "distance.hpp"
 
 namespace ft{
@@ -304,5 +305,34 @@ class vector
         pointer             p;
         allocator_type      _alloc;
 };
+
+template <class T, class Alloc>  bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+template <class T, class Alloc>  bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    return !(lhs == rhs);
+}
+template <class T, class Alloc>  bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+template <class T, class Alloc>  bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    return !(rhs < lhs);
+}
+template <class T, class Alloc>  bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    return (rhs < lhs);
+}
+template <class T, class Alloc>  bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+    return !(lhs < rhs);
+}
+template <class T, class Alloc>  void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+{
+    x.swap(y);
+}
 }
 #endif

@@ -317,24 +317,24 @@ void	vector_main(void) {
 		cout << "\n";
 	}
 
-	// cout << "\033[0;32m** relational operators **\033[0m\n";
-	// {
-	// 	ft::vector<int> vect1 (3,20);
-	// 	ft::vector<int> vect2 (4,10);
+	cout << "\033[0;32m** relational operators **\033[0m\n";
+	{
+		ft::vector<int> vect1 (3,20);
+		ft::vector<int> vect2 (4,10);
 
-	// 	if (vect1==vect2)
-	// 		cout << "vect1 and vect2 are equal\n";
-	// 	if (vect1!=vect2)
-	// 		cout << "vect1 and vect2 are not equal\n";
-	// 	if (vect1< vect2)
-	// 		cout << "vect1 is less than vect2\n";
-	// 	if (vect1> vect2)
-	// 		cout << "vect1 is greater than vect2\n";
-	// 	if (vect1<=vect2)
-	// 		cout << "vect1 is less than or equal to vect2\n";
-	// 	if (vect1>=vect2)
-	// 		cout << "vect1 is greater than or equal to vect2\n";
-	// }
+		if (vect1==vect2)
+			cout << "vect1 and vect2 are equal\n";
+		if (vect1!=vect2)
+			cout << "vect1 and vect2 are not equal\n";
+		if (vect1< vect2)
+			cout << "vect1 is less than vect2\n";
+		if (vect1> vect2)
+			cout << "vect1 is greater than vect2\n";
+		if (vect1<=vect2)
+			cout << "vect1 is less than or equal to vect2\n";
+		if (vect1>=vect2)
+			cout << "vect1 is greater than or equal to vect2\n";
+	}
 
 	cout << "\033[0;32m** swap (non-member) **\033[0m\n";
 	{
@@ -400,26 +400,26 @@ void	stack_main(void) {
 		cout << "the top of the stack after popping 4 is: " << stk.top() << "\n";
 	}
 
-	// cout << "\033[0;32m** relational operators **\033[0m\n";
-	// {
-	// 	ft::vector<int>	vect1(3, 10);
-	// 	ft::vector<int>	vect2(4, 20);
-	// 	ft::stack<int, ft::vector<int> > stack1(vect1);
-	// 	ft::stack<int, ft::vector<int> > stack2(vect2);
+	cout << "\033[0;32m** relational operators **\033[0m\n";
+	{
+		ft::vector<int>	vect1(3, 10);
+		ft::vector<int>	vect2(4, 20);
+		ft::stack<int, ft::vector<int> > stack1(vect1);
+		ft::stack<int, ft::vector<int> > stack2(vect2);
 
-	// 	if (stack1 == stack2)
-	// 		cout << "stack1 and stack2 are equal\n";
-	// 	if (stack1 != stack2)
-	// 		cout << "stack1 and stack2 are not equal\n";
-	// 	if (stack1 < stack2)
-	// 		cout << "stack1 is less than stack2\n";
-	// 	if (stack1 > stack2)
-	// 		cout << "stack1 is greater than stack2\n";
-	// 	if (stack1 <= stack2)
-	// 		cout << "stack1 is less than or equal to stack2\n";
-	// 	if (stack1 >= stack2)
-	// 		cout << "stack1 is greater than or equal to stack2\n";
-	// }
+		if (stack1 == stack2)
+			cout << "stack1 and stack2 are equal\n";
+		if (stack1 != stack2)
+			cout << "stack1 and stack2 are not equal\n";
+		if (stack1 < stack2)
+			cout << "stack1 is less than stack2\n";
+		if (stack1 > stack2)
+			cout << "stack1 is greater than stack2\n";
+		if (stack1 <= stack2)
+			cout << "stack1 is less than or equal to stack2\n";
+		if (stack1 >= stack2)
+			cout << "stack1 is greater than or equal to stack2\n";
+	}
 }
 
 int	main(void) {
