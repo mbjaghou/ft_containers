@@ -128,17 +128,17 @@ void	vector_main(void) {
 		cout << "the last element in the vector is: " << *(vect.end() - 1) << "\n";
 	}
 
-	// cout << "\033[0;32m** rbegin and rend **\033[0m\n";
-	// {
-	// 	ft::vector<int> vect(5);
-	// 	ft::vector<int>::iterator rit = vect.begin();
-	// 	for (int i = 0; rit!= vect.end(); ++rit, ++i)
-	// 		*rit = i;
-	// 	cout << "the vector elements in erverse order:";
-	// 	for (ft::vector<int>::reverse_iterator it = vect.rbegin(); it != vect.rend(); ++it)
-	// 		cout << ' ' << *it;
-	// 	cout << "\n";
-	// }
+	cout << "\033[0;32m** rbegin and rend **\033[0m\n";
+	{
+		ft::vector<int> vect(5);
+		ft::vector<int>::iterator rit = vect.begin();
+		for (int i = 0; rit!= vect.end(); ++rit, ++i)
+			*rit = i;
+		cout << "the vector elements in erverse order:";
+		for (ft::vector<int>::reverse_iterator it = vect.rbegin(); it != vect.rend(); ++it)
+			cout << ' ' << *it;
+		cout << "\n";
+	}
 
 	cout << "\033[0;32m** empty **\033[0m\n";
 	{

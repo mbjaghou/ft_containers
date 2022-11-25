@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/25 11:41:37 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:01:59 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ class vector
         typedef typename Allocator::const_pointer                   const_pointer;
         typedef ft::random_access_iterator<value_type>              iterator;
         typedef ft::random_access_iterator<const value_type>        const_iterator;
-        typedef ft::reverse_iterator<value_type>                    reverse_iterator;
-        typedef ft::reverse_iterator<const value_type>              const_reverse_iterator;
+        typedef ft::reverse_iterator<iterator>                    reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator>              const_reverse_iterator;
         /*--------Member functions-----*/
         explicit vector (const allocator_type& alloc = allocator_type()) : p(NULL), _capacity(0), _size(0), _alloc(alloc){}
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
@@ -90,10 +90,10 @@ class vector
         const_iterator begin() const{return const_iterator(p);}
         iterator end(){return (iterator(p + _size));}
         const_iterator end() const{return (const_iterator(p + _size));}
-        reverse_iterator rbegin(){return (reverse_iterator(p + _size));}
-        const_reverse_iterator rbegin() const{return (const_reverse_iterator(p + _size));}
-        reverse_iterator rend(){return reverse_iterator(p);}
-        const_reverse_iterator rend() const{return (const_reverse_iterator(p));}
+        reverse_iterator rbegin(){return (reverse_iterator(end()));}
+        const_reverse_iterator rbegin() const{return (const_reverse_iterator(end()));}
+        reverse_iterator rend(){return reverse_iterator(begin());}
+        const_reverse_iterator rend() const{return (const_reverse_iterator(begin()));}
         /*--------Capacity-----*/
         bool empty() const{
             if(this->_size == 0)

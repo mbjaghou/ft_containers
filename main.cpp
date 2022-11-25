@@ -148,4 +148,7 @@ int main() {
 //     for(size_t i = 0; i < obj1.size(); ++i)
 //         std::cout << obj1[i] << " " << std::endl;
     // print();
+    //     ft::vector<int> obj1(15, 5);
+
+    // std::cout <<  *obj1.rbegin() << std::endl;
 }
