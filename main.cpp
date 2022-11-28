@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 12:37:58 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:35:39 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void vectortest()
 
         cout << i << endl;
     }
-    cout << "capacity test      ++++" << endl;
+    cout << "capacity" << endl;
     {
         ft::vector<int> obj(10, 10);
 
@@ -179,9 +179,12 @@ void vectortest()
     }
     cout << "clear" << endl;
     {
-        ft::vector<int> obj(1, 5);
+        ft::vector<int> obj;
+
+        obj.push_back(1);
 
         obj.clear();
+        cout << obj.size() << endl;
         ft::vector<int>::iterator it;
         for (it = obj.begin(); it != obj.end(); ++it)
             cout << *it << " ";
@@ -328,7 +331,7 @@ void vectortest()
     cout << "operator==,!=,<,<=,>,>=,<=>" << endl;
     {
         ft::vector<int> obj(5, 10);
-        ft::vector<int> obj1(5, 10);
+        ft::vector<int> obj1(obj);
         ft::vector<int> obj2(10, 15);
 
         if (obj == obj1)

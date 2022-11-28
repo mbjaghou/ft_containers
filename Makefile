@@ -1,0 +1,25 @@
+NAME =   ft_containers
+CC = c++
+
+INCLUDE = equal.hpp is_integral.hpp vector.hpp lexicographical_compare.hpp iterator.hpp\
+				
+
+
+FLAGS = -Wall -Werror -Wextra -std=c++98
+
+SRC =	main.cpp \
+
+
+OBJ = main.o \
+
+all: $(NAME)
+
+$(NAME): $(SRC) $(INCLUDE)
+	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+
+clean :
+	/bin/rm -f $(OBJ)
+
+fclean : clean
+	/bin/rm -f $(NAME)
+re : fclean all

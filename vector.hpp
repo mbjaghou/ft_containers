@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 12:44:02 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:43:45 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,13 @@ class vector
         typedef ft::reverse_iterator<iterator>                    reverse_iterator;
         typedef ft::reverse_iterator<const_iterator>              const_reverse_iterator;
         /*--------Member functions-----*/
-        explicit vector (const allocator_type& alloc = allocator_type()) : p(NULL), _capacity(0), _size(0), _alloc(alloc){}
+        explicit vector (const allocator_type& alloc = allocator_type())
+        {
+            p = NULL;
+            this->_capacity = 0;
+            this->_alloc = alloc;
+            this->_size = 0;
+        }
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
             _size = n;
@@ -124,6 +130,7 @@ class vector
         /*--------Modifiers-----*/
         void clear()
         {
+            std::cout << "test\n";
             for (size_type  i = 0; i < _size; ++i)
                 _alloc.destroy(p + i);
         }
