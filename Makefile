@@ -1,7 +1,7 @@
 NAME =   ft_containers
 CC = c++
 
-INCLUDE = equal.hpp is_integral.hpp vector.hpp lexicographical_compare.hpp iterator.hpp\
+INCLUDE = equal.hpp is_integral.hpp vector.hpp lexicographical_compare.hpp iterator.hpp stack.hpp\
 				
 
 

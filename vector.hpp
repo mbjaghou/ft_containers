@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:43:45 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:47:22 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,9 @@ class vector
         /*--------Modifiers-----*/
         void clear()
         {
-            std::cout << "test\n";
             for (size_type  i = 0; i < _size; ++i)
                 _alloc.destroy(p + i);
+            _size = 0;
         }
         template <class InputIterator>
             void assign (InputIterator first, InputIterator last , 

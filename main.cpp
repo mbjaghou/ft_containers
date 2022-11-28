@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:35:39 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:53:35 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 using namespace std;
-void vectortest()
+void ft_vector()
 {
     cout << "constructs the vector" << endl;
     {
@@ -179,16 +179,13 @@ void vectortest()
     }
     cout << "clear" << endl;
     {
-        ft::vector<int> obj;
+        ft::vector<int> obj(10, 10);
 
         obj.push_back(1);
 
+        cout << obj.size() << endl;
         obj.clear();
         cout << obj.size() << endl;
-        ft::vector<int>::iterator it;
-        for (it = obj.begin(); it != obj.end(); ++it)
-            cout << *it << " ";
-        cout << endl;
     }
     cout << "insert" << endl;
     {
@@ -360,8 +357,27 @@ void vectortest()
         cout << endl;
     }
 }
+
+void ft_stack()
+{
+    ft::stack<int> stack;
+    stack.push(21);
+    stack.push(22);
+    stack.push(24);
+    stack.push(25);
+       
+    stack.pop();
+    stack.pop();
+   
+    while (!stack.empty()) {
+        cout << stack.top() <<" ";
+        stack.pop();
+    }
+}
 int main()
 {
-    cout << "vector testing" << std::endl;
-    vectortest();
+    cout << "vector testing" << endl;
+    ft_vector();
+    cout << "stack testing" << endl;
+    ft_stack();
 }
