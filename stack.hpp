@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:18:44 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/24 19:06:25 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:55:22 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,4 @@ class stack
         container_type c;
 };
 }
-
 #endif

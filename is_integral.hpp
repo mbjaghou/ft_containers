@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:11:25 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/25 10:45:23 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:55:09 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ template <> struct is_integral<unsigned long long int> : integral_constant<bool,
 
 
 
-
-
 template<bool Cond, class T = void> struct enable_if {};
 template<class T> struct enable_if<true, T> { typedef T type; };
 }
-
-
 #endif

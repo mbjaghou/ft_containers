@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:04:20 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/21 13:02:33 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:55:16 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ template<class InputIt1, class InputIt2>
         return (first1 == last1) && (first2 != last2);
     }
 }
-
 
 #endif
