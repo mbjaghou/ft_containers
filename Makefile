@@ -2,8 +2,6 @@ NAME =   ft_containers
 CC = c++
 
 INCLUDE = equal.hpp is_integral.hpp vector.hpp lexicographical_compare.hpp iterator.hpp stack.hpp\
-				
-
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 

@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:18:44 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:55:22 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:05:09 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #define STACK_HPP
 
 #include <iostream>
-#include <stack>
-#include <vector>
 #include "vector.hpp"
 
 namespace ft

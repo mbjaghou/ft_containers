@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:47:22 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:46:56 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,4 +343,3 @@ template <class T, class Alloc>  void swap (vector<T,Alloc>& x, vector<T,Alloc>&
 }
 }
 #endif
-
