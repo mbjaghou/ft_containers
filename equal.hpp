@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:08:42 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:55:00 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:00:34 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,5 @@ bool equal(InputIt1 first1, InputIt1 last1,
     }
     return true;
 }
-
 }
-
 #endif

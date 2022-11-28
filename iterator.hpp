@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:55:14 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:01:21 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <stddef.h>
 #include <iostream>
-
 
 /*------------------random_access_iterator------------------*/
 namespace ft
@@ -53,16 +52,12 @@ class random_access_iterator
         private:
             pointer p;
 };
-
-	template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator-( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
-		return (lhs.base() - rhs.base());
-	}
-    	template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator+( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
-		return (lhs.base() + rhs.base());
-	}
-
-
-
+template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator-( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
+	return (lhs.base() - rhs.base());
+}
+	template <class Iter1, class Iter2> typename random_access_iterator<Iter1>::difference_type operator+( const random_access_iterator<Iter1> &lhs, const random_access_iterator<Iter2> &rhs) {
+	return (lhs.base() + rhs.base());
+}
 template <class it1, class it2>
     bool operator<(const random_access_iterator<it1> &rhs, const random_access_iterator<it2> &rhs1)
         {return (rhs.base() < rhs1.base());}
@@ -81,7 +76,6 @@ template <class it1, class it2>
 template <class it1, class it2>
     bool operator!=(const random_access_iterator<it1> &rhs, const random_access_iterator<it2> &rhs1)
         {return (rhs.base() != rhs1.base());}
-
 
 /*------------------iterator_traits------------------*/
 template <class Iterator> class iterator_traits {
@@ -172,5 +166,4 @@ typename reverse_iterator<Iterator1>::difference_type
     operator-( const reverse_iterator<Iterator1>& lhs,
                const reverse_iterator<Iterator2>& rhs ){return(rhs.base() - lhs.base());}
 }
-
 #endif

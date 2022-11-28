@@ -7,7 +7,7 @@ using namespace std;
 
 // general template
 template <class T>
-bool Eq(T lhs, T rhs,typename ft::enable_if<ft::is_integral<T>::value >::type* = 0)
+bool Eq(int lhs, T rhs)
 {
     std::cout << "first 1\n";
     return (lhs == rhs);
@@ -16,7 +16,7 @@ bool Eq(T lhs, T rhs,typename ft::enable_if<ft::is_integral<T>::value >::type* =
 //handel the overoding betwine template that take the same paramter is call sfinae
 // enable if hanedl , sfinae is maen substitution failure is not an error 
 template <class T>
-bool Eq(T LJ, T lQ ,typename ft::enable_if<!ft::is_integral<T>::value >::type* = 0)
+bool Eq(T LJ, T lQ, typename ft::enable_if<ft::is_integral<int>::value >::type* = 0 )
 {
     std::cout << "first 2\n";
     return (true);
@@ -32,9 +32,8 @@ bool Eq(T LJ, T lQ ,typename ft::enable_if<!ft::is_integral<T>::value >::type* =
 int main()
 {
     std::vector<std::string> obj(5, "mouhamed");
-    if (Eq(obj.begin(), obj.end()))
-        return (true);
-    if (Eq(obj.begin(), obj.end()))
+
+    if (Eq(4, 5))
         return (true);
     return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 13:53:35 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:27:55 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 using namespace std;
 void ft_vector()
 {
-    cout << "constructs the vector" << endl;
+    cout << "\033[32m---------------->constructs the vector---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(5, 10);
 
@@ -32,7 +32,7 @@ void ft_vector()
             cout << *it1 << " ";
         cout << endl;
     }
-    cout << "Copy assignment operator" << endl;
+    cout << "\033[32m---------------->Copy assignment operator---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(5, 10);
         ft::vector<int> obj1(5, 5);
@@ -43,7 +43,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "assign" << endl;
+    cout << "\033[32m---------------->assign---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(5, 10);
         ft::vector<int> obj1(5, 5);
@@ -60,7 +60,7 @@ void ft_vector()
             cout << *it1 << " ";
         cout << endl;
     }
-    cout << "at" << endl;
+    cout << "\033[32m---------------->at---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(5, 10);
 
@@ -68,7 +68,7 @@ void ft_vector()
         const int &i = obj.at(5);
         cout << i << endl;
     }
-    cout << "operator[]" << endl;
+    cout << "\033[32m---------------->operator[]---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(15);
 
@@ -78,13 +78,13 @@ void ft_vector()
             cout << obj[i] << " ";
         cout << endl;
     }
-    cout << "front" << endl;
+    cout << "\033[32m---------------->front---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(1, 150);
 
         cout << obj.front() << endl;
     }
-    cout << "back" << endl;
+    cout << "\033[32m---------------->back---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(1, 150);
 
@@ -92,7 +92,7 @@ void ft_vector()
 
         cout << obj.back() << endl;
     }
-    cout << "data" << endl;
+    cout << "\033[32m---------------->data---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 20);
 
@@ -102,7 +102,7 @@ void ft_vector()
             cout << p[i] << " ";
         cout << endl;
     }
-    cout << "Iterators begin" << endl;
+    cout << "\033[32m---------------->Iterators begin---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 80);
 
@@ -110,7 +110,7 @@ void ft_vector()
 
         cout << *it << endl;
     }
-    cout << "Iterators end" << endl;
+    cout << "\033[32m---------------->Iterators end---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 80);
 
@@ -120,7 +120,7 @@ void ft_vector()
 
         cout << *it << endl;
     }
-    cout << "reverse_iterator rbegin, rend" << endl;
+    cout << "\033[32m---------------->reverse_iterator rbegin, rend---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 15);
 
@@ -131,7 +131,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "empty" << endl;
+    cout << "\033[32m---------------->empty---------------->\033[0m" << endl;
     {
         ft::vector<int> obj;
 
@@ -140,7 +140,7 @@ void ft_vector()
         else
             cout << "is not" << endl;
     }
-    cout << "size" << endl;
+    cout << "\033[32m---------------->size---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 10);
 
@@ -148,7 +148,7 @@ void ft_vector()
 
         cout << i << endl;
     }
-    cout << "max_size" << endl;
+    cout << "\033[32m---------------->max_size---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 10);
 
@@ -156,7 +156,7 @@ void ft_vector()
 
         cout << i << endl;
     }
-    cout << "capacity" << endl;
+    cout << "\033[32m---------------->capacity---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 10);
 
@@ -165,7 +165,7 @@ void ft_vector()
 
         cout << i << endl;
     }
-    cout << "reserve" << endl;
+    cout << "\033[32m---------------->reserve---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 10);
 
@@ -177,7 +177,7 @@ void ft_vector()
         obj.reserve(15);
         cout << "capacity: " << obj.capacity() << endl;
     }
-    cout << "clear" << endl;
+    cout << "\033[32m---------------->clear---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 10);
 
@@ -187,7 +187,7 @@ void ft_vector()
         obj.clear();
         cout << obj.size() << endl;
     }
-    cout << "insert" << endl;
+    cout << "\033[32m---------------->insert---------------->\033[0m" << endl;
     {
         ft::vector<int> obj;
         obj.push_back(1);
@@ -202,7 +202,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "insert2" << endl;
+    cout << "\033[32m---------------->insert2---------------->\033[0m" << endl;
     {
         ft::vector<int> obj;
         obj.push_back(1);
@@ -217,7 +217,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "insert3" << endl;
+    cout << "\033[32m---------------->insert3---------------->\033[0m" << endl;
     {
         ft::vector<int> obj;
         ft::vector<int> obj1(5, 100);
@@ -233,7 +233,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "erase" << endl;
+    cout << "\033[32m---------------->erase---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 100);
 
@@ -247,7 +247,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "erase1" << endl;
+    cout << "\033[32m---------------->erase1---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 100);
 
@@ -261,7 +261,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "push_back" << endl;
+    cout << "\033[32m---------------->push_back---------------->\033[0m" << endl;
     {
         ft::vector<int> obj;
         obj.push_back(1);
@@ -277,7 +277,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "pop_back" << endl;
+    cout << "\033[32m---------------->pop_back---------------->\033[0m" << endl;
     {
         ft::vector<int> obj;
         obj.push_back(1);
@@ -296,7 +296,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "resize" << endl;
+    cout << "\033[32m---------------->resize---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(30, 10);
 
@@ -314,7 +314,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "swap" << endl;
+    cout << "\033[32m---------------->swap---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 100);
         ft::vector<int> obj1(10, 200);
@@ -325,7 +325,7 @@ void ft_vector()
             cout << *it << " ";
         cout << endl;
     }
-    cout << "operator==,!=,<,<=,>,>=,<=>" << endl;
+    cout << "\033[32m---------------->operator==,!=,<,<=,>,>=;---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(5, 10);
         ft::vector<int> obj1(obj);
@@ -344,7 +344,7 @@ void ft_vector()
         if (obj <= obj1)
             cout << "operator <= " << endl;
     }
-    cout << "::swap" << endl;
+    cout << "\033[32m---------------->::swap---------------->\033[0m" << endl;
     {
         ft::vector<int> obj(10, 50);
         ft::vector<int> obj1(10, 150);
@@ -376,8 +376,8 @@ void ft_stack()
 }
 int main()
 {
-    cout << "vector testing" << endl;
+    cout << "\033[41mvector testing\033[0m" << endl;
     ft_vector();
-    cout << "stack testing" << endl;
+    cout << "\033[41mstack testing\033[0m" << endl;
     ft_stack();
 }
