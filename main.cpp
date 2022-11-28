@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 11:50:39 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:37:58 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,37 @@ void vectortest()
         obj.swap(obj1);
         ft::vector<int>::iterator it;
         for (it = obj.begin(); it != obj.end(); ++it)
+            cout << *it << " ";
+        cout << endl;
+    }
+    cout << "operator==,!=,<,<=,>,>=,<=>" << endl;
+    {
+        ft::vector<int> obj(5, 10);
+        ft::vector<int> obj1(5, 10);
+        ft::vector<int> obj2(10, 15);
+
+        if (obj == obj1)
+            cout << "operator == " << endl;
+        if (obj != obj2)
+            cout << "operator != " << endl;
+        if (obj < obj2)
+            cout << "operator < " << endl;
+        if (obj2 > obj)
+            cout << "operator > " << endl;
+        if (obj >= obj1)
+            cout << "operator >= " << endl;
+        if (obj <= obj1)
+            cout << "operator <= " << endl;
+    }
+    cout << "::swap" << endl;
+    {
+        ft::vector<int> obj(10, 50);
+        ft::vector<int> obj1(10, 150);
+
+        swap(obj, obj1);
+        
+        ft::vector<int>::iterator it;
+        for(it = obj.begin(); it != obj.end(); ++it)
             cout << *it << " ";
         cout << endl;
     }
