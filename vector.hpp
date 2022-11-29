@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 14:46:56 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/29 08:47:21 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "is_integral.hpp"
 #include "equal.hpp"
 #include "lexicographical_compare.hpp"
+#include "distance.hpp"
 
 
 namespace ft{
@@ -60,7 +61,7 @@ class vector
             typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
             {
 
-                _size = std::distance(first, last);
+                _size = ft::distance(first, last);
                 _capacity = _size;
                 _alloc = alloc;
                 p = _alloc.allocate(_size);
@@ -138,7 +139,7 @@ class vector
             void assign (InputIterator first, InputIterator last , 
             typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
             {
-                size_type n = std::distance(first, last);
+                size_type n = ft::distance(first, last);
                 for (size_type  i = 0; i < _size; ++i)
                     _alloc.destroy(p + i);
                 reserve(n);
@@ -170,7 +171,7 @@ class vector
                 _capacity = _capacity * 2;
                 reserve(_capacity);
             }
-            size_t o = std::distance(position, end());
+            size_t o = ft::distance(position, end());
             vector<value_type> tmp;
             tmp.assign(position, end());
             for (size_t i = o; i < _size; ++i)
@@ -183,7 +184,7 @@ class vector
         }
         void insert (iterator position, size_type n, const value_type& val)
         {
-            difference_type o = std::distance(position, end());
+            difference_type o = ft::distance(position, end());
             vector<value_type> tmp;
             tmp.assign(position, end());
 	        if (n + _size > _capacity)
@@ -200,8 +201,8 @@ class vector
             void insert (iterator position, InputIterator first, InputIterator last, 
             typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
             {
-                size_type d = std::distance(first, last);
-                size_type o = std::distance(begin(), position);
+                size_type d = ft::distance(first, last);
+                size_type o = ft::distance(begin(), position);
                 vector<value_type> tmp;
                 tmp.assign(position, end());
                 if (d + _size > _capacity)

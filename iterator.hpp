@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/28 14:01:21 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:07:49 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,4 +166,6 @@ typename reverse_iterator<Iterator1>::difference_type
     operator-( const reverse_iterator<Iterator1>& lhs,
                const reverse_iterator<Iterator2>& rhs ){return(rhs.base() - lhs.base());}
 }
+/*------------------bidirectional_iterator_tag------------------*/
+
 #endif
