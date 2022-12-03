@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/29 14:59:49 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:36:14 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class map
     public:
         typedef key                                                         key_type;
         typedef T                                                           mapped_type;
-        typedef std::pair<const key_type,mapped_type>                       value_type;
+        typedef ft::pair<const key_type,mapped_type>                       value_type;
         typedef Compare                                                     key_compare;
         typedef typename std::map::value_comp                               value_compare;
         typedef Allocator                                                   allocator_type;
@@ -68,7 +68,7 @@ class map
         size_type max_size() const{}
         /*Modifiers*/
         void clear(){}
-        std::pair<iterator, bool> insert( const value_type& value ){}
+        ft::pair<iterator, bool> insert( const value_type& value ){}
         iterator insert( iterator pos, const value_type& value ){}
         template< class InputIt >
             void insert( InputIt first, InputIt last ){}
@@ -80,38 +80,38 @@ class map
         size_type count( const Key& key ) const{}
         iterator find( const Key& key ){}
         const_iterator find( const Key& key ) const{}
-        std::pair<iterator,iterator> equal_range( const Key& key ){}
-        std::pair<const_iterator,const_iterator> equal_range( const Key& key ) const{}
+        ft::pair<iterator,iterator> equal_range( const Key& key ){}
+        ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const{}
         iterator lower_bound( const Key& key ){}
         const_iterator lower_bound( const Key& key ) const{}
         iterator upper_bound( const Key& key ){}
         const_iterator upper_bound( const Key& key ) const{}
         /*Observers*/
         key_compare key_comp() const{}
-        std::map::value_compare value_comp() const{}
+        ft::map::value_compare value_comp() const{}
     protected:
         
 };
 template< class Key, class T, class Compare, class Alloc >
-bool operator==( const std::map<Key,T,Compare,Alloc>& lhs,
-                 const std::map<Key,T,Compare,Alloc>& rhs ){}
+bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
+                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
 template< class Key, class T, class Compare, class Alloc >
-bool operator!=( const std::map<Key,T,Compare,Alloc>& lhs,
-                 const std::map<Key,T,Compare,Alloc>& rhs ){}
+bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
+                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
 template< class Key, class T, class Compare, class Alloc >
-bool operator<( const std::map<Key,T,Compare,Alloc>& lhs,
-                const std::map<Key,T,Compare,Alloc>& rhs ){}
+bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
+                const ft::map<Key,T,Compare,Alloc>& rhs ){}
 template< class Key, class T, class Compare, class Alloc >
-bool operator<=( const std::map<Key,T,Compare,Alloc>& lhs,
-                 const std::map<Key,T,Compare,Alloc>& rhs ){}
+bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
+                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
 template< class Key, class T, class Compare, class Alloc >
-bool operator>( const std::map<Key,T,Compare,Alloc>& lhs,
-                const std::map<Key,T,Compare,Alloc>& rhs ){}
+bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
+                const ft::map<Key,T,Compare,Alloc>& rhs ){}
 template< class Key, class T, class Compare, class Alloc >
-bool operator>=( const std::map<Key,T,Compare,Alloc>& lhs,
-                 const std::map<Key,T,Compare,Alloc>& rhs ){}
+bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
+                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
 template< class Key, class T, class Compare, class Alloc >
-void swap( std::map<Key,T,Compare,Alloc>& lhs,
-           std::map<Key,T,Compare,Alloc>& rhs ){}
+void swap( ft::map<Key,T,Compare,Alloc>& lhs,
+           ft::map<Key,T,Compare,Alloc>& rhs ){}
 }
 #endif
