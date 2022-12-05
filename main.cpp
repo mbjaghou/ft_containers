@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/30 12:09:51 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:10:11 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,12 +378,12 @@ void ft_stack()
 
 int main()
 {
-    ft::pair<char, int> pr = ft::make_pair<char, int>('c', 6);
-ft::pair<char, int> pr1(pr);
-    std::cout << pr1.first << ' ' << pr1.second << '\n';
+//     ft::pair<char, int> pr = ft::make_pair<char, int>('c', 6);
+// ft::pair<char, int> pr1(pr);
+//     std::cout << pr1.first << ' ' << pr1.second << '\n';
     
-//     cout << "\033[41mvector testing\033[0m" << endl;
-//     ft_vector();
-//     cout << "\033[41mstack testing\033[0m" << endl;
-//     ft_stack();
+    cout << "\033[41mvector testing\033[0m" << endl;
+    ft_vector();
+    cout << "\033[41mstack testing\033[0m" << endl;
+    ft_stack();
 }
