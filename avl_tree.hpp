@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/18 17:37:50 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:26:29 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ namespace ft
         class avl
         {
             private:
-                avlnode<T, AL> *root;
                 cop         _comp;
                 AL          alloc;
+                typename AL::template rebind<T>::other _Alloc_type;
             public:
+                avlnode<T, AL> *root;
                 avl(): root(NULL){};
                 ~avl(){};
                 avl(const avl &obj)
@@ -90,13 +91,8 @@ namespace ft
                 }
                 avlnode<T, AL> * newNode(T* key)
                 {
-                    avlnode<T, AL> *node;
-                    node->_key = alloc.allocate(1);
-                    alloc.construct(node->_key, key);
-                    node->left = NULL;
-                    node->right = NULL;
-                    node->parent = NULL;
-                    node->_height = 1;
+                    avlnode<T, AL> *node = _Alloc_type.allocate(1);
+                    _Alloc_type.construct(node, key);
                     return (node);
                 }
                 avlnode<T, AL> *rightRotate(avlnode<T, AL> *y)
@@ -155,19 +151,26 @@ namespace ft
 			    		return (search(node->right, key));
 			    	return (node);
 			    }
-                avlnode<T, AL> *insert(avlnode<T, AL>* node, T key)
+                avlnode<T, AL> *findMin(avlnode<T, AL> *node) const
+			    {
+				    if (!node)
+				    	return (NULL);
+				    avlnode<T, AL> *min = node;
+				    while (min->left)
+				    	min = min->left;
+				    return (min);
+			    }
+			    avlnode<T, AL> *findMax(avlnode<T, AL> *node) const
+			    {
+			    	if (!node)
+			    		return (NULL);
+			    	avlnode<T, AL> *max = node;
+			    	while (max->right)
+			    		max = max->right;
+			    	return (max);
+			    }
+                avlnode<T, AL> balance(avlnode<T, AL> *node, T key)
                 {
-                    if (node == NULL)
-                        return(newNode(key));
-                    if (key < node->key)
-                        node->left = insert(node->left, key);
-                    else if (key > node->key)
-                        node->right = insert(node->right, key);
-                    else
-                        return node;
-                    node->_height = 1 + max(height(node->left),
-                        height(node->right));
-
                     int balance = getBalance(node);
 
                     // Left Left Case  
@@ -192,6 +195,21 @@ namespace ft
                         return leftRotate(node);
                     }
                     return node;
+                    
+                }
+                avlnode<T, AL> *insert(avlnode<T, AL>* node, T key)
+                {
+                    if (node == NULL)
+                        return(newNode(key));
+                    if (key < node->key)
+                        node->left = insert(node->left, key);
+                    else if (key > node->key)
+                        node->right = insert(node->right, key);
+                    else
+                        return node;
+                    node->_height = 1 + max(height(node->left),
+                        height(node->right));
+                    return balance(node, key);
                 }
         };
 }
