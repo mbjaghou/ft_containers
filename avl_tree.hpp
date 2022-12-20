@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/19 19:26:29 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:11:53 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,22 +174,22 @@ namespace ft
                     int balance = getBalance(node);
 
                     // Left Left Case  
-                    if (balance > 1 && key < node->left->key)
+                    if (balance > 1 && _comp(key->first , node->left->key->first))
                         return rightRotate(node);
 
                     // Right Right Case  
-                    if (balance < -1 && key > node->right->key)
+                    if (balance < -1 && _comp(node->right->key->first , key->first))
                         return leftRotate(node);
 
                     // Left Right Case  
-                    if (balance > 1 && key > node->left->key)
+                    if (balance > 1 && _comp(node->left->key->first, key->first))
                     {
                         node->left = leftRotate(node->left);
                         return rightRotate(node);
                     }
 
                     // Right Left Case  
-                    if (balance < -1 && key < node->right->key)
+                    if (balance < -1 && _comp(key->first , node->right->key->first))
                     {
                         node->right = rightRotate(node->right);
                         return leftRotate(node);
@@ -197,20 +197,61 @@ namespace ft
                     return node;
                     
                 }
-                avlnode<T, AL> *insert(avlnode<T, AL>* node, T key)
+                avlnode<T, AL> *insert(avlnode<T, AL>* node, T &key)
                 {
                     if (node == NULL)
                         return(newNode(key));
-                    if (key < node->key)
+                    if (_comp(key->first , node->key->first))
+                    {
                         node->left = insert(node->left, key);
-                    else if (key > node->key)
+                        node->left->parent = node;
+                    }
+                    else if (_comp(key->first , node->key->first))
+                    {
                         node->right = insert(node->right, key);
+                        node->right->parent = node;
+                    }
                     else
                         return node;
                     node->_height = 1 + max(height(node->left),
                         height(node->right));
                     return balance(node, key);
                 }
+                avlnode<T, AL>* _delete(avlnode<T, AL>* node, const T& key) {
+		        	if (node == NULL)
+		        		return NULL;
+		        	if (_comp(key.first ,node->key->first))
+		        		node->left = _delete(node->left, key);
+		        	else if(_comp(node->key->first, key.first))
+		        		node->right = _delete(node->right, key);
+		        	else {
+		        		if(node->left == NULL || node->right == NULL) {
+		        			avlnode<T, AL> *temp = node->left ? node->left : node->right;
+		        			if (temp == NULL) {
+		        				temp = node;
+		        				node = NULL;
+		        			}
+		        			else {
+		        				avlnode<T, AL> *np = node->parent;
+		        				*node = *temp;
+		        				node->parent = np;
+		        			}
+		        			alloc.destroy(temp->key);
+		        			alloc.deallocate(temp->key , 1);
+		        			_Alloc_type.destroy(temp);
+		        			_Alloc_type.deallocate(temp, 1);
+		        		}
+		        		else {
+		        			avlnode<T, AL> *tmp = minNode(node->right);
+		        			alloc.construct(node->key, *tmp->key);
+		        			node->right = _delete(node->right, *tmp->key);
+		        		}
+		        	}
+		        	if (node == NULL)
+		        		return NULL;
+		        	node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+		        	return balance(node, key);
+		        }
         };
 }
 
