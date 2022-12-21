@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/21 16:34:55 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:02:20 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ namespace ft
 		        	}
 		        	if (node == NULL)
 		        		return NULL;
-		        	node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+		        	node->height = 1 + max(getHeight(node->left), getHeight(node->right));
 		        	return balance_for_delete(node);
 		        }
         };
