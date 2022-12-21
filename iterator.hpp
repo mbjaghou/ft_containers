@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:53:04 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:35:43 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stddef.h>
 #include <iostream>
+#include "avl_tree.hpp"
 
 /*------------------random_access_iterator------------------*/
 namespace ft
@@ -166,7 +167,7 @@ typename reverse_iterator<Iterator1>::difference_type
     operator-( const reverse_iterator<Iterator1>& lhs,
                const reverse_iterator<Iterator2>& rhs ){return(rhs.base() - lhs.base());}
 /*------------------bidirectional_iterator------------------*/
-template <class T>
+template <class T, class cop = std::less<T> , class AL = std::allocator<T> >
 class bidirectional_iterator
 {
     public:
@@ -175,26 +176,41 @@ class bidirectional_iterator
         typedef T*                                      pointer;
         typedef T&                                      reference;
         typedef std::bidirectional_iterator_tag         iterator_category;
-        bidirectional_iterator(/* args */){}
+        bidirectional_iterator(/* args */): node(NULL), p(NULL){}
         ~bidirectional_iterator(){}
         bidirectional_iterator(bidirectional_iterator &obj){ *this = obj;}
-        bidirectional_iterator &operator==(bidirectional_iterator &obj){p = obj.p; return *this;}
-        pointer base() const {return (this->p);}
-        reference operator*() {return (*p);}
+        bidirectional_iterator &operator==(bidirectional_iterator &obj){p = obj.p; node = obj.node; return *this;}
+        reference operator*() {return (p);}
         pointer operator->(void) {return &(operator*());}
-        bidirectional_iterator& operator++ (){}
-        bidirectional_iterator& operator++ (int){}
-        bidirectional_iterator& operator-- (){}
-        bidirectional_iterator& operator-- (int){}
+        bidirectional_iterator& operator++ ()
+        {
+            
+        }
+        bidirectional_iterator& operator++ (int)
+        {
+            bidirectional_iterator tmp = *this;
+            ++(*this);
+            return (tmp);
+        }
+        bidirectional_iterator& operator-- ()
+        {
+        }
+        bidirectional_iterator& operator-- (int)
+        {
+            bidirectional_iterator tmp = *this;
+            --(*this);
+            return (tmp);
+        }
     private:
-        pointer p;
+        value_type *p;
+        avl<T, cop, AL> *node;
 };
-template< class Iterator1, class Iterator2 >
-bool operator==( const ft::bidirectional_iterator<Iterator1>& lhs,
-                 const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs.base() == rhs.base());}
-template< class Iterator1, class Iterator2 >
-bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
-                 const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs.base() != rhs.base());}
+// template< class Iterator1, class Iterator2 >
+// bool operator==( const ft::bidirectional_iterator<Iterator1>& lhs,
+//                  const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs.base() == rhs.base());}
+// template< class Iterator1, class Iterator2 >
+// bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
+//                  const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs.base() != rhs.base());}
 
 
 }
