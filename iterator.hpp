@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/21 16:35:43 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:49:35 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,16 +201,16 @@ class bidirectional_iterator
             --(*this);
             return (tmp);
         }
+        template< class Iterator1, class Iterator2 >
+        bool operator==( const ft::bidirectional_iterator<Iterator1>& lhs,
+                         const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs == rhs);}
+        template< class Iterator1, class Iterator2 >
+        bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
+                         const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs != rhs);}
     private:
-        value_type *p;
+        pointer *p;
         avl<T, cop, AL> *node;
 };
-// template< class Iterator1, class Iterator2 >
-// bool operator==( const ft::bidirectional_iterator<Iterator1>& lhs,
-//                  const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs.base() == rhs.base());}
-// template< class Iterator1, class Iterator2 >
-// bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
-//                  const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs.base() != rhs.base());}
 
 
 }

@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/16 16:14:48 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:52:49 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,27 @@ template < class Key, class T, class Compare = std::less<Key>, class Allocator =
 class map
 {
     public:
-        typedef key                                                         key_type;
-        typedef T                                                           mapped_type;
-        typedef ft::pair<const key_type,mapped_type>                       value_type;
-        typedef Compare                                                     key_compare;
-        typedef typename std::map::value_comp                               value_compare;
-        typedef Allocator                                                   allocator_type;
-        typedef typename allocator_type::reference	                        reference;
-        typedef typename allocator_type::const_reference	                const_reference;
-        typedef typename allocator_type::pointer                            pointer;
-        typedef typename allocator_type::const_pointer                      const_pointer;
-
-        
-        typedef ft::reverse_iterator<iterator>                              reverse_iterator;
-        typedef ft::reverse_iterator<const_reverse_iterator>                const_reverse_iterator;
-        typedef typename ft::iterator_traits<iterator>::difference_type     difference_type;
-        typedef difference_type                                             size_type;
+        typedef key                                                                    key_type;
+        typedef T                                                                      mapped_type;
+        typedef ft::pair<const key_type,mapped_type>                                   value_type;
+        typedef Compare                                                                key_compare;
+        typedef typename std::map::value_comp                                          value_compare;
+        typedef Allocator                                                              allocator_type;
+        typedef typename allocator_type::reference	                                   reference;
+        typedef typename allocator_type::const_reference	                           const_reference;
+        typedef typename allocator_type::pointer                                       pointer;
+        typedef typename allocator_type::const_pointer                                 const_pointer;
+        typedef ft::bidirectional_iterator<mapped_type, Compare, Allocator>            iterator;
+        typedef ft::bidirectional_iterator<const mapped_type, Compare, Allocator>      const_iterator;
+        typedef ft::reverse_iterator<iterator>                                         reverse_iterator;
+        typedef ft::reverse_iterator<const_reverse_iterator>                           const_reverse_iterator;
+        typedef typename ft::iterator_traits<iterator>::difference_type                difference_type;
+        typedef difference_type                                                        size_type;
 
         /*Member functions*/
         map(){}
         ~map(){}
-        explicit map( const Compare& comp, const Allocator& alloc = Allocator() ){}
+        explicit map( const Compare& comp, const Allocator& alloc = Allocator() ): _alloc(NULL){}
         template< class InputIt >
             map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() ){}
         map( const map& other ){}
@@ -90,6 +90,7 @@ class map
         key_compare key_comp() const{}
         ft::map::value_compare value_comp() const{}
     protected:
+        allocator_type _alloc;
         
 };
 template< class Key, class T, class Compare, class Alloc >
