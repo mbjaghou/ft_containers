@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/22 10:49:35 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/23 21:41:51 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,15 +176,25 @@ class bidirectional_iterator
         typedef T*                                      pointer;
         typedef T&                                      reference;
         typedef std::bidirectional_iterator_tag         iterator_category;
-        bidirectional_iterator(/* args */): node(NULL), p(NULL){}
+        bidirectional_iterator(/* args */){}
         ~bidirectional_iterator(){}
         bidirectional_iterator(bidirectional_iterator &obj){ *this = obj;}
-        bidirectional_iterator &operator==(bidirectional_iterator &obj){p = obj.p; node = obj.node; return *this;}
+        bidirectional_iterator &operator==(bidirectional_iterator &obj){p = obj.p; return *this;}
         reference operator*() {return (p);}
         pointer operator->(void) {return &(operator*());}
         bidirectional_iterator& operator++ ()
         {
-            
+            avlnode<T, AL> *node = search(tree, p);
+            if (node == NULL)
+                return (NULL);
+            avlnode<T, AL> *succ = successor(node->key);
+            if (succ)
+            {
+                p = succ->key;
+            }
+            else
+                p = NULL;
+            return (*this);
         }
         bidirectional_iterator& operator++ (int)
         {
@@ -193,8 +203,7 @@ class bidirectional_iterator
             return (tmp);
         }
         bidirectional_iterator& operator-- ()
-        {
-        }
+        {}
         bidirectional_iterator& operator-- (int)
         {
             bidirectional_iterator tmp = *this;
@@ -202,16 +211,15 @@ class bidirectional_iterator
             return (tmp);
         }
         template< class Iterator1, class Iterator2 >
-        bool operator==( const ft::bidirectional_iterator<Iterator1>& lhs,
+        friend bool operator==( const ft::bidirectional_iterator<Iterator1>& lhs,
                          const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs == rhs);}
         template< class Iterator1, class Iterator2 >
-        bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
+        friend bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
                          const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs != rhs);}
     private:
         pointer *p;
-        avl<T, cop, AL> *node;
+        avl<T, cop, AL> *tree;
 };
-
-
 }
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/22 12:52:49 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:29:08 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include "iterator.hpp"
 #include <map>
+#include "avl_tree.hpp"
 
 namespace ft
 {
@@ -36,16 +37,23 @@ class map
         typedef ft::bidirectional_iterator<mapped_type, Compare, Allocator>            iterator;
         typedef ft::bidirectional_iterator<const mapped_type, Compare, Allocator>      const_iterator;
         typedef ft::reverse_iterator<iterator>                                         reverse_iterator;
-        typedef ft::reverse_iterator<const_reverse_iterator>                           const_reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator>                                   const_reverse_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type                difference_type;
-        typedef difference_type                                                        size_type;
+        typedef size_t                                                        size_type;
 
         /*Member functions*/
-        map(){}
+        map(): _alloc(NULL), _size(0), _value(NULL){}
         ~map(){}
-        explicit map( const Compare& comp, const Allocator& alloc = Allocator() ): _alloc(NULL){}
+        explicit map( const Compare& comp, const Allocator& alloc = Allocator() )
+        {
+            _alloc = alloc;
+            _value = NULL;
+            _size = 0;
+        }
         template< class InputIt >
-            map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() ){}
+            map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() )
+            {
+            }
         map( const map& other ){}
         map& operator=( const map& other ){}
         allocator_type get_allocator() const{}
@@ -91,6 +99,8 @@ class map
         ft::map::value_compare value_comp() const{}
     protected:
         allocator_type _alloc;
+        value_type     _value;
+        size_type      _size;
         
 };
 template< class Key, class T, class Compare, class Alloc >
