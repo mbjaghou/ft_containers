@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:57:32 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/02 13:06:47 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 13:35:45 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct pair
                 this->first = p.first;
                 this->second = p.second;
             }
-        pair( const pair& p ){ *this = p;}
+        pair( const pair& p ): first(p.first), second(p.second){}
         pair& operator=( const pair& other )
         {
             first = other.first;
@@ -74,9 +74,9 @@ struct pair
             {
                 return !(lhs < rhs);
             }
-        
         T1 first;
         T2 second;
+        
 };
 template< class T1, class T2 >
     ft::pair<T1, T2> make_pair( T1 t, T2 u )

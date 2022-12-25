@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/24 14:24:27 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 16:25:11 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
     class avlnode
     {
         public:
-            T*       _key;//element
+            T*      element;
             avlnode *left;
             avlnode *right;
             avlnode *parent;
@@ -29,7 +29,7 @@ namespace ft
             A alloc;
             avlnode()
             {
-                _key = 0;
+                element = 0;
                 left = NULL;
                 right = NULL;
                 parent = NULL;
@@ -37,19 +37,19 @@ namespace ft
             }
             ~avlnode()
             {}
-            avlnode(T value) {
+            avlnode(const T &value) {
 				left = NULL;
 				right = NULL;
 				parent = NULL;
-				_key = alloc.allocate(1);
-				alloc.construct(_key, value);
+				element = alloc.allocate(1);
+				alloc.construct(element, value);
 				_height = 1;
 			}
             avlnode(const avlnode &obj){ *this = obj;}
             avlnode &operator=(const avlnode &obj)
             {
-                _key = alloc.allocate(1);
-                alloc.construct(_key, obj._key);
+                element = alloc.allocate(1);
+                alloc.construct(element, obj.element);
                 left = obj.left;
                 right = obj.right;
                 parent = obj.parent;
@@ -63,7 +63,7 @@ namespace ft
             private:
                 cop         _comp;
                 AL          alloc;
-                typename AL::template rebind<T>::other _Alloc_type;
+                typename AL::template rebind<avlnode<T, AL> >::other _Alloc_type;
             public:
                 avlnode<T, AL> *root;
                 avl(): root(NULL){};
@@ -78,13 +78,9 @@ namespace ft
                     _comp = obj._comp;
                     return (*this);
                 }
-                
-                T max(T a, T b){
-                    return (a < b) ? a : b;
-                }
-                int height(avlnode<T, AL> *n)
+                int height(avlnode<T, AL> *n) const 
                 {
-                    if (n == 0)
+                    if (n == NULL)
                         return (0);
                     return (n->_height);
                 }
@@ -98,8 +94,8 @@ namespace ft
                     y->left = tmp;
                     x->parent = y->parent;
                     y->parent = x;
-                    y->_height = max(height(y->left), height(y->right)) + 1;
-                    x->_height = max(height(x->left), height(x->right)) + 1;
+                    y->_height = std::max(height(y->left), height(y->right)) + 1;
+                    x->_height = std::max(height(x->left), height(x->right)) + 1;
 
                     return (x);
                 }
@@ -113,15 +109,15 @@ namespace ft
                     y->right = tmp;
                     x->parent = y->parent;
                     y->parent = x;
-                    y->_height = max(height(y->left), height(y->right)) + 1;
-                    x->_height = max(height(x->left), height(x->right)) + 1;
+                    y->_height = std::max(height(y->left), height(y->right)) + 1;
+                    x->_height = std::max(height(x->left), height(x->right)) + 1;
                     return (x);
                 }
                 // void preOrder(avlnode<T, AL> *root)
                 // {
                 //     if (root != NULL)
                 //     {
-                //         std::cout << root->_key << " ";
+                //         std::cout << root->element << " ";
                 //         preOrder(root->left);
                 //         preOrder(root->right);
                 //     }
@@ -138,18 +134,17 @@ namespace ft
                         root = _delete(root, key);
                         return true;
                     }
-                    else
-                        return false; 
+                    return false; 
                 }
                 avlnode<T, AL> *search(avlnode<T, AL> *node, const T &key) const
 			    {
 			    	if (!node )
 			    		return (node);
-			    	if (node->_key && node->_key->first == key.first)
+			    	if (node->element && node->element->first == key.first)
 			    		return (node);
-			    	if (_comp(key.first, node->_key->first))
+			    	if (_comp(key.first, node->element->first))
 			    		return (search(node->left, key));
-			    	else if (_comp(node->_key->first, key.first))
+			    	else if (_comp(node->element->first, key.first))
 			    		return (search(node->right, key));
 			    	return (node);
 			    }
@@ -171,30 +166,30 @@ namespace ft
 			    		max = max->right;
 			    	return (max);
 			    }
-                int getBalance(avlnode<T, AL> *n)
+                int getBalance(avlnode<T, AL> *n) const
                 {
                     if (n == 0)
                         return (0);
                     return (height(n->left) - height(n->right));
                 }
-                avlnode<T, AL> balance_for_insert(avlnode<T, AL> *node, T key)
+                avlnode<T, AL>* balance_for_insert(avlnode<T, AL> *node, const T &key)
                 {
                     int balance = getBalance(node);
                     
                     // Left Left Case  
-                    if (balance > 1 && _comp(key->first , node->left->_key->first))
+                    if (balance > 1 && _comp(key.first , node->left->element->first))
                         return rightRotate(node);
                     // Right Right Case  
-                    if (balance < -1 && _comp(node->right->_key->first , key->first))
+                    if (balance < -1 && _comp(node->right->element->first , key.first))
                         return leftRotate(node);
                     // Left Right Case  
-                    if (balance > 1 && _comp(node->left->_key->first, key->first))
+                    if (balance > 1 && _comp(node->left->element->first, key.first))
                     {
                         node->left = leftRotate(node->left);
                         return rightRotate(node);
                     }
                     // Right Left Case  
-                    if (balance < -1 && _comp(key->first , node->right->_key->first))
+                    if (balance < -1 && _comp(key.first , node->right->element->first))
                     {
                         node->right = rightRotate(node->right);
                         return leftRotate(node);
@@ -202,7 +197,7 @@ namespace ft
                     return node;
                     
                 }
-                avlnode<T, AL> balance_for_delete(avlnode<T, AL> *node)
+                avlnode<T, AL> *balance_for_delete(avlnode<T, AL> *node) 
                 {
                     int balance = getBalance(node);
                     
@@ -227,38 +222,38 @@ namespace ft
                     return node;
                     
                 }
-                avlnode<T, AL> * newNode(T* key)
+                avlnode<T, AL> * newNode(const T &key)
                 {
                     avlnode<T, AL> *node = _Alloc_type.allocate(1);
                     _Alloc_type.construct(node, key);
                     return (node);
                 }
-                avlnode<T, AL> *insert(avlnode<T, AL>* node, T &key)
+                avlnode<T, AL> *insert(avlnode<T, AL>* node, const T &key)
                 {
                     if (node == NULL)
                         return(newNode(key));
-                    if (_comp(key->first ,node->_key->first ))
+                    if (_comp(key.first ,node->element->first ))
                     {
                         node->left = insert(node->left, key);
                         node->left->parent = node;
                     }
-                    else if (_comp(node->_key->first , key->first))
+                    else if (_comp(node->element->first , key.first))
                     {
                         node->right = insert(node->right, key);
                         node->right->parent = node;
                     }
                     else
                         return node;
-                    node->_height = 1 + max(height(node->left),
+                    node->_height = 1 + std::max(height(node->left),
                         height(node->right));
                     return balance_for_insert(node, key);
                 }
                 avlnode<T, AL>* _delete(avlnode<T, AL>* node, const T& key) {
 		        	if (node == NULL)
 		        		return NULL;
-		        	if (_comp(key.first ,node->_key->first))
+		        	if (_comp(key.first ,node->element->first))
 		        		node->left = _delete(node->left, key);
-		        	else if(_comp(node->_key->first, key.first))
+		        	else if(_comp(node->element->first, key.first))
 		        		node->right = _delete(node->right, key);
 		        	else {
                         // node with only one child or no child 
@@ -274,8 +269,8 @@ namespace ft
 		        				*node = *temp;
 		        				node->parent = newparent;
 		        			}
-		        			alloc.destroy(temp->_key);
-		        			alloc.deallocate(temp->_key , 1);
+		        			alloc.destroy(temp->element);
+		        			alloc.deallocate(temp->element , 1);
 		        			_Alloc_type.destroy(temp);
 		        			_Alloc_type.deallocate(temp, 1);
 		        		}
@@ -283,13 +278,13 @@ namespace ft
                             // node with two children: Get the inorder 
                             // successor (smallest in the right subtree) 
 		        			avlnode<T, AL> *tmp = minValueNode(node->right);
-		        			alloc.construct(node->_key, *tmp->_key);
-		        			node->right = _delete(node->right, *tmp->_key);
+		        			alloc.construct(node->element, *tmp->element);
+		        			node->right = _delete(node->right, *tmp->element);
 		        		}
 		        	}
 		        	if (node == NULL)
 		        		return NULL;
-		        	node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+		        	node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
 		        	return balance_for_delete(node);
 		        }
                 avlnode<T, AL>* successor(const T& key) const 

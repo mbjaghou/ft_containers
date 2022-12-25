@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 11:44:47 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 16:24:54 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 #include <map>
 #include "avl_tree.hpp"
 #include "pair.hpp"
+#include "distance.hpp"
 
 namespace ft
 {
-template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key, T> > >
+template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > >
 class map
 {
     public:
@@ -29,7 +30,7 @@ class map
         typedef T                                                                      mapped_type;
         typedef ft::pair<const key_type,mapped_type>                                   value_type;
         typedef Compare                                                                key_compare;
-        typedef typename std::map::value_comp                                          value_compare;
+        // typedef typename std::map::value_comp                                          value_compare;
         typedef Allocator                                                              allocator_type;
         typedef typename allocator_type::reference	                                   reference;
         typedef typename allocator_type::const_reference	                           const_reference;
@@ -40,19 +41,18 @@ class map
         typedef ft::reverse_iterator<iterator>                                         reverse_iterator;
         typedef ft::reverse_iterator<const_iterator>                                   const_reverse_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type                difference_type;
-        typedef size_t                                                        size_type;
+        typedef size_t                                                                 size_type;
 
-    protected:
-        allocator_type _alloc;
-        size_type      _size;
-        key_compare    _comp;
-        avl<ft::pair<key_type, mapped_type>, Compare, Allocator> *tree;
         /*Member functions*/
-        map(): _alloc(NULL), _size(0), _value(NULL){}
+        map(): _size(0)
+        {
+            
+        }
         ~map(){}
         explicit map( const Compare& comp, const Allocator& alloc = Allocator() )
         {
             _alloc = alloc;
+            _comp = comp;
             _size = 0;
         }
         template< class InputIt >
@@ -60,6 +60,7 @@ class map
             {
                 _alloc = alloc;
                 _size = ft::distance(first, last);
+                _comp = comp;
                 while (first != last)
                 {
                     tree->insert(*first);
@@ -73,7 +74,6 @@ class map
         map& operator=( const map& other )
         {
             _alloc = other._alloc;
-            _value = other._value;
             _size = other._size;
             return (*this);
         }
@@ -88,10 +88,21 @@ class map
         const T& at( const Key& key ) const{}
         T& operator[]( const Key& key )
         {
-            
+                value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+				avlnode<value_type, Allocator>* node = tree.search(tree.root, o);
+				if (!node) {
+     
+					node = tree.insert(o);
+					_size++;
+					return (tree.search(tree.root, o))->element->second;
+				}
+				return node->element->second;
         }
         /*Iterators*/
-        iterator begin(){}
+        iterator begin()
+        {
+            return iterator();
+        }
         const_iterator begin() const{}
         iterator end(){}
         const_iterator end() const{}
@@ -125,7 +136,12 @@ class map
         const_iterator upper_bound( const Key& key ) const{}
         /*Observers*/
         key_compare key_comp() const{}
-        ft::map::value_compare value_comp() const{}
+        // ft::map::value_compare value_comp() const{}
+    protected:
+        allocator_type _alloc;
+        size_type      _size;
+        key_compare    _comp;
+        avl<ft::pair<const key_type, mapped_type>, Compare, Allocator> tree;
         
 };
 template< class Key, class T, class Compare, class Alloc >

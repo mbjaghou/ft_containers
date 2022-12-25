@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DISTANCE_HPP
+#define DISTANCE_HPP
 #include "iterator.hpp"
 
 namespace ft {
@@ -15,3 +16,5 @@ template <class input_itt>
 		}
 
 }
+
+#endif
