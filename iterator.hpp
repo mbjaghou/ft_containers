@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/23 21:41:51 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/24 18:33:24 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,24 +176,26 @@ class bidirectional_iterator
         typedef T*                                      pointer;
         typedef T&                                      reference;
         typedef std::bidirectional_iterator_tag         iterator_category;
-        bidirectional_iterator(/* args */){}
+        bidirectional_iterator(/* args */): p(NULL), tree(NULL){}
+        bidirectional_iterator(pointer p, avl<T, cop, AL> *tree) : p(p), tree(tree){}
         ~bidirectional_iterator(){}
         bidirectional_iterator(bidirectional_iterator &obj){ *this = obj;}
-        bidirectional_iterator &operator==(bidirectional_iterator &obj){p = obj.p; return *this;}
-        reference operator*() {return (p);}
+        bidirectional_iterator &operator==(bidirectional_iterator &obj){p = obj.p; tree = obj.tree; return *this;}
+        reference operator*() {return (*p);}
         pointer operator->(void) {return &(operator*());}
         bidirectional_iterator& operator++ ()
         {
-            avlnode<T, AL> *node = search(tree, p);
-            if (node == NULL)
-                return (NULL);
-            avlnode<T, AL> *succ = successor(node->key);
-            if (succ)
+            avlnode<T, AL> *node = tree->search(tree->root, p);
+            if (node)
             {
-                p = succ->key;
+                avlnode<T, AL> *successor = tree->successor(node->key);
+                if (successor)
+                {
+                    p = successor->key;
+                }
+                else
+                    p = NULL;
             }
-            else
-                p = NULL;
             return (*this);
         }
         bidirectional_iterator& operator++ (int)
@@ -203,7 +205,27 @@ class bidirectional_iterator
             return (tmp);
         }
         bidirectional_iterator& operator-- ()
-        {}
+        {
+            if (!p) {
+				if (tree->root->right)
+					p = tree->maxValueNode(tree->root->right)->data;
+				else
+					p = tree->root->data;
+				return *this;
+			}
+            avlnode<T, AL> *node = tree->search(tree->root, p);
+            if (node)
+            {
+                avlnode<T, AL> *predecessor = tree->predecessor(node->key);
+                if (predecessor)
+                {
+                    p = predecessor->key;
+                }
+                else
+                    p = NULL;
+            }
+            return (*this);
+        }
         bidirectional_iterator& operator-- (int)
         {
             bidirectional_iterator tmp = *this;
@@ -217,7 +239,7 @@ class bidirectional_iterator
         friend bool operator!=( const ft::bidirectional_iterator<Iterator1>& lhs,
                          const ft::bidirectional_iterator<Iterator2>& rhs ){return (lhs != rhs);}
     private:
-        pointer *p;
+        pointer p;
         avl<T, cop, AL> *tree;
 };
 }

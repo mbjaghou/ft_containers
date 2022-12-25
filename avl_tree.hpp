@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/23 12:43:52 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/24 14:24:27 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,21 @@ namespace ft
                 //         preOrder(root->right);
                 //     }
                 // }
+                avlnode<T, AL> *insert(const T &key)
+                {
+                    root = insert(root, key);
+                    return (root);
+                }
+                bool _delete(const T &key)
+                {
+                    if (search(root, key))
+                    {
+                        root = _delete(root, key);
+                        return true;
+                    }
+                    else
+                        return false; 
+                }
                 avlnode<T, AL> *search(avlnode<T, AL> *node, const T &key) const
 			    {
 			    	if (!node )
