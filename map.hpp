@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 21:22:47 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 21:59:30 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ class map
             map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() )
             {
                 _alloc = alloc;
-                _size = ft::distance(first, last);
+                _size = std::distance(first, last);
                 _comp = comp;
                 while (first != last)
                 {
                     tree.insert(*first);
-                    first++;
+                    ++first;
                 }
             }
         map( const map& other )
@@ -157,12 +157,32 @@ class map
                     first++;
                 }
             }
-        iterator erase( iterator pos ){}
-        iterator erase( iterator first, iterator last ){}
-        size_type erase( const Key& key ){}
+        iterator erase( iterator pos )
+        {
+            tree.deleteNode(pos->first);
+            _size--;
+            return (pos);
+        }
+        iterator erase( iterator first, iterator last )
+        {
+            while (first != last)
+            {
+                tree.deleteNode(first->first);
+                first++;
+                _size--;
+            }
+            return (first);
+        }
+        size_type erase( const Key& key )
+        {
+            tree.deleteNode(key);
+            _size--;
+            return (1);
+        }
         void swap( map& other ){}
         /*Lookup*/
-        size_type count( const Key& key ) const{}
+        size_type count( const Key& key ) const
+        {}
         iterator find( const Key& key ){}
         const_iterator find( const Key& key ) const{}
         ft::pair<iterator,iterator> equal_range( const Key& key ){}
