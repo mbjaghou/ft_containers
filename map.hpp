@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 16:24:54 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 21:08:10 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,15 @@ class map
         typedef typename allocator_type::const_reference	                           const_reference;
         typedef typename allocator_type::pointer                                       pointer;
         typedef typename allocator_type::const_pointer                                 const_pointer;
-        typedef ft::bidirectional_iterator<mapped_type, Compare, Allocator>            iterator;
-        typedef ft::bidirectional_iterator<const mapped_type, Compare, Allocator>      const_iterator;
+        typedef ft::bidirectional_iterator<value_type, Compare, Allocator>            iterator;
+        typedef ft::bidirectional_iterator<const value_type, Compare, Allocator>      const_iterator;
         typedef ft::reverse_iterator<iterator>                                         reverse_iterator;
         typedef ft::reverse_iterator<const_iterator>                                   const_reverse_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type                difference_type;
         typedef size_t                                                                 size_type;
 
         /*Member functions*/
-        map(): _size(0)
-        {
-            
-        }
+        map(): _size(0){}
         ~map(){}
         explicit map( const Compare& comp, const Allocator& alloc = Allocator() )
         {
@@ -63,7 +60,7 @@ class map
                 _comp = comp;
                 while (first != last)
                 {
-                    tree->insert(*first);
+                    tree.insert(*first);
                     first++;
                 }
             }
@@ -83,7 +80,8 @@ class map
         }
         /*Element access*/
         T& at( const Key& key )
-        {        
+        {
+             
         }
         const T& at( const Key& key ) const{}
         T& operator[]( const Key& key )
@@ -101,25 +99,64 @@ class map
         /*Iterators*/
         iterator begin()
         {
-            return iterator();
+            return iterator(tree.minValueNode(tree.root) ? tree.minValueNode(tree.root)->element : NULL, &tree);
         }
-        const_iterator begin() const{}
-        iterator end(){}
-        const_iterator end() const{}
-        reverse_iterator rbegin(){}
-        const_reverse_iterator rbegin() const{}
-        reverse_iterator rend(){}
-        const_reverse_iterator rend() const{}
+        const_iterator begin() const
+        {
+            return const_iterator(tree.minValueNode(tree.root) ? tree.minValueNode(tree.root)->element : NULL, &tree);
+        }
+        iterator end()
+        {
+            return iterator(NULL, &tree);
+        }
+        const_iterator end() const
+        {
+            return const_iterator(NULL, &tree);
+        }
+        reverse_iterator rbegin(){return reverse_iterator(end());}
+        const_reverse_iterator rbegin() const{return const_reverse_iterator(end());}
+        reverse_iterator rend(){ return reverse_iterator(begin());}
+        const_reverse_iterator rend() const{ return const_reverse_iterator(begin());}
         /*Capacity*/
-        bool empty() const{}
+        bool empty() const
+        {
+            if (_size == 0)
+                return (true);
+            return (false);
+        }
         size_type size() const {return(_size);}
         size_type max_size() const{return (_alloc.max_size());}
         /*Modifiers*/
         void clear(){}
-        ft::pair<iterator, bool> insert( const value_type& value ){}
-        iterator insert( iterator pos, const value_type& value ){}
+        ft::pair<iterator, bool> insert( const value_type& value )
+        {
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, value);
+            if (!node) {
+                node = tree.insert(value);
+                _size++;
+                return (ft::make_pair(iterator(node->element, &tree), true));
+            }
+            return (ft::make_pair(iterator(node->element, &tree), false));
+        }
+        iterator insert( iterator pos, const value_type& value )
+        {
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, value);
+            if (!node) {
+                node = tree.insert(value);
+                _size++;
+                return (iterator(node->element, &tree));
+            }
+            return (iterator(node->element, &tree));
+        }
         template< class InputIt >
-            void insert( InputIt first, InputIt last ){}
+            void insert( InputIt first, InputIt last )
+            {
+                while (first != last)
+                {
+                    tree.insert(*first);
+                    first++;
+                }
+            }
         iterator erase( iterator pos ){}
         iterator erase( iterator first, iterator last ){}
         size_type erase( const Key& key ){}
@@ -150,7 +187,8 @@ bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
                  {}
 template< class Key, class T, class Compare, class Alloc >
 bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
+                 const ft::map<Key,T,Compare,Alloc>& rhs )
+                 {}
 template< class Key, class T, class Compare, class Alloc >
 bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
