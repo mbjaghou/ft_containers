@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 21:01:04 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 21:24:25 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,13 @@ class bidirectional_iterator
         pointer operator->(void) {return &(operator*());}
         bidirectional_iterator& operator++ ()
         {
-            avlnode<T, AL> *node = tree->search(tree->root, p);
+            avlnode<T, AL> *node = tree->search(tree->root, *p);
             if (node)
             {
-                avlnode<T, AL> *successor = tree->successor(node->key);
+                avlnode<T, AL> *successor = tree->successor(*p);
                 if (successor)
                 {
-                    p = successor->key;
+                    p = successor->element;
                 }
                 else
                     p = NULL;
@@ -208,18 +208,18 @@ class bidirectional_iterator
         {
             if (!p) {
 				if (tree->root->right)
-					p = tree->maxValueNode(tree->root->right)->data;
+					p = tree->maxValueNode(tree->root->right)->element;
 				else
-					p = tree->root->data;
+					p = tree->root->element;
 				return *this;
 			}
-            avlnode<T, AL> *node = tree->search(tree->root, p);
+            avlnode<T, AL> *node = tree->search(tree->root, *p);
             if (node)
             {
-                avlnode<T, AL> *predecessor = tree->predecessor(node->key);
+                avlnode<T, AL> *predecessor = tree->predecessor(*p);
                 if (predecessor)
                 {
-                    p = predecessor->key;
+                    p = predecessor->element;
                 }
                 else
                     p = NULL;

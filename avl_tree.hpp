@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 16:25:11 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/25 21:20:43 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,13 +287,13 @@ namespace ft
 		        	node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
 		        	return balance_for_delete(node);
 		        }
-                avlnode<T, AL>* successor(const T& key) const 
+                avlnode<T, AL>* successor(const T key) const 
                 {
                     avlnode<T, AL>*	node = search(root, key);
                     if (node == NULL)
                         return NULL;
                     if (node->right)
-                        return minNode(node->right);
+                        return minValueNode(node->right);
                     avlnode<T, AL>*	successor = node->parent;
                     while (successor && successor->left != node) {
                         node = successor;
@@ -306,7 +306,7 @@ namespace ft
                     if (node == NULL)
                         return NULL;
                     if (node->left)
-                        return maxNode(node->left);
+                        return maxValueNode(node->left);
                     avlnode<T, AL>*	predecessor = node->parent;
                     while (predecessor && predecessor->right != node) {
                         predecessor = predecessor;
