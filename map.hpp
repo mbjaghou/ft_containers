@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/26 15:29:06 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:25:59 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <map>
 #include "avl_tree.hpp"
 #include "pair.hpp"
+#include "lexicographical_compare.hpp"
 #include "distance.hpp"
 
 namespace ft
@@ -141,10 +142,9 @@ class map
         size_type size() const {return(_size);}
         size_type max_size() const{return (_alloc.max_size());}
         /*Modifiers*/
-        void clear()
-        {
-            
-        }
+        // void clear()
+        // {
+        // }
         ft::pair<iterator, bool> insert( const value_type& value )
         {
             avlnode<value_type, Allocator>* node = tree.search(tree.root, value);
@@ -228,12 +228,18 @@ class map
                 return (end());
             return (const_iterator(node->element, &tree));    
         }
-        ft::pair<iterator,iterator> equal_range( const Key& key )
-        {}
+        // ft::pair<iterator,iterator> equal_range( const Key& key )
+        // {
+            
+        // }
         // ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const{}
-        // iterator lower_bound( const Key& key ){}
+        iterator lower_bound( const Key& key )
+        {
+        
+        }
         // const_iterator lower_bound( const Key& key ) const{}
-        // iterator upper_bound( const Key& key ){}
+        // iterator upper_bound( const Key& key ){
+        // }
         // const_iterator upper_bound( const Key& key ) const{}
         /*Observers*/
         // key_compare key_comp() const{}
@@ -242,31 +248,49 @@ class map
         allocator_type _alloc;
         size_type      _size;
         key_compare    _comp;
-        avl<ft::pair<const key_type, mapped_type>, Compare, Allocator> tree;
+        avl<value_type, Compare, Allocator> tree;
         
 };
 // template< class Key, class T, class Compare, class Alloc >
 // bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
 //                  const ft::map<Key,T,Compare,Alloc>& rhs )
-//                  {}
+//                  {
+//                     return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+//                  }
 // template< class Key, class T, class Compare, class Alloc >
 // bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
 //                  const ft::map<Key,T,Compare,Alloc>& rhs )
-//                  {}
+//                  {
+                    
+//                  }
 // template< class Key, class T, class Compare, class Alloc >
 // bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
-//                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
+//                 const ft::map<Key,T,Compare,Alloc>& rhs )
+//                 {
+//                     return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+//                 }
 // template< class Key, class T, class Compare, class Alloc >
 // bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
-//                  const ft::map<Key,T,Compare,Alloc>& rhs ){}
+//                  const ft::map<Key,T,Compare,Alloc>& rhs ){
+                    
+//                  }
 // template< class Key, class T, class Compare, class Alloc >
 // bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
-//                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
+//                 const ft::map<Key,T,Compare,Alloc>& rhs )
+//                 {
+                    
+//                 }
 // template< class Key, class T, class Compare, class Alloc >
 // bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
-//                  const ft::map<Key,T,Compare,Alloc>& rhs ){}
-// template< class Key, class T, class Compare, class Alloc >
-// void swap( ft::map<Key,T,Compare,Alloc>& lhs,
-//            ft::map<Key,T,Compare,Alloc>& rhs ){}
+//                  const ft::map<Key,T,Compare,Alloc>& rhs )
+//                  {
+                      
+//                  }
+template< class Key, class T, class Compare, class Alloc >
+void swap( ft::map<Key,T,Compare,Alloc>& lhs,
+           ft::map<Key,T,Compare,Alloc>& rhs )
+           {
+                lhs.swap(rhs);  
+           }
 }
 #endif

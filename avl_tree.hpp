@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/26 15:18:14 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:14:31 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,14 @@ namespace ft
                     x->_height = std::max(height(x->left), height(x->right)) + 1;
                     return (x);
                 }
-                // void preOrder(avlnode<T, AL> *root)
-                // {
-                //     if (root != NULL)
-                //     {
-                //         std::cout << root->element << " ";
-                //         preOrder(root->left);
-                //         preOrder(root->right);
-                //     }
-                // }
+                void preOrder(avlnode<T, AL> *root)
+                {
+                    if (root != NULL)
+                    {
+                        preOrder(root->left);
+                        preOrder(root->right);
+                    }
+                }
                 avlnode<T, AL> *insert(const T &key)
                 {
                     root = insert(root, key);
@@ -133,7 +132,6 @@ namespace ft
                 {
                     if (search(root, key))
                     {
-                        std::cout << "123 ====="  << key.first << "      " << root->element->first << std::endl;
                         root = delete2(root, key);
                         return (true);
                     }
