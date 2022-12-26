@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 21:20:43 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:18:14 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ namespace ft
             avlnode &operator=(const avlnode &obj)
             {
                 element = alloc.allocate(1);
-                alloc.construct(element, obj.element);
+                alloc.construct(element, *obj.element);
                 left = obj.left;
                 right = obj.right;
                 parent = obj.parent;
@@ -76,6 +76,8 @@ namespace ft
                 {
                     root = obj.root;
                     _comp = obj._comp;
+                    alloc = obj.alloc;
+                    _Alloc_type = obj._Alloc_type;
                     return (*this);
                 }
                 int height(avlnode<T, AL> *n) const 
@@ -127,12 +129,13 @@ namespace ft
                     root = insert(root, key);
                     return (root);
                 }
-                bool _delete(const T &key)
+                bool delete1(const T &key)
                 {
                     if (search(root, key))
                     {
-                        root = _delete(root, key);
-                        return true;
+                        std::cout << "123 ====="  << key.first << "      " << root->element->first << std::endl;
+                        root = delete2(root, key);
+                        return (true);
                     }
                     return false; 
                 }
@@ -248,13 +251,19 @@ namespace ft
                         height(node->right));
                     return balance_for_insert(node, key);
                 }
-                avlnode<T, AL>* _delete(avlnode<T, AL>* node, const T& key) {
+                avlnode<T, AL>* delete2(avlnode<T, AL>* node, const T& key) {
 		        	if (node == NULL)
 		        		return NULL;
 		        	if (_comp(key.first ,node->element->first))
-		        		node->left = _delete(node->left, key);
+                    {
+                        
+		        		node->left = delete2(node->left, key);
+                    }
 		        	else if(_comp(node->element->first, key.first))
-		        		node->right = _delete(node->right, key);
+                    {
+		        		node->right = delete2(node->right, key);
+                        
+                    }
 		        	else {
                         // node with only one child or no child 
 		        		if(node->left == NULL || node->right == NULL) {
@@ -279,12 +288,13 @@ namespace ft
                             // successor (smallest in the right subtree) 
 		        			avlnode<T, AL> *tmp = minValueNode(node->right);
 		        			alloc.construct(node->element, *tmp->element);
-		        			node->right = _delete(node->right, *tmp->element);
+		        			node->right = delete2(node->right, *tmp->element);
 		        		}
 		        	}
 		        	if (node == NULL)
 		        		return NULL;
-		        	node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+		        	node->_height = 1 + std::max(height(node->left), height(node->right));
+
 		        	return balance_for_delete(node);
 		        }
                 avlnode<T, AL>* successor(const T key) const 
@@ -309,7 +319,7 @@ namespace ft
                         return maxValueNode(node->left);
                     avlnode<T, AL>*	predecessor = node->parent;
                     while (predecessor && predecessor->right != node) {
-                        predecessor = predecessor;
+                        node = predecessor;
                         predecessor = node->parent;
                     }
                     return predecessor;

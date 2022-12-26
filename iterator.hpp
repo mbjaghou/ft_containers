@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 21:56:13 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/26 14:09:16 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ class bidirectional_iterator
             }
             return (*this);
         }
-        bidirectional_iterator& operator++ (int)
+        bidirectional_iterator operator++ (int)
         {
             bidirectional_iterator tmp = *this;
             ++(*this);
@@ -226,7 +226,7 @@ class bidirectional_iterator
             }
             return (*this);
         }
-        bidirectional_iterator& operator-- (int)
+        bidirectional_iterator operator-- (int)
         {
             bidirectional_iterator tmp = *this;
             --(*this);

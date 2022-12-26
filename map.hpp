@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/25 21:59:30 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:29:06 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ class map
             map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() )
             {
                 _alloc = alloc;
-                _size = std::distance(first, last);
+                _size = ft::distance(first, last);
                 _comp = comp;
                 while (first != last)
                 {
                     tree.insert(*first);
-                    ++first;
+                    first++;
                 }
             }
         map( const map& other )
@@ -72,6 +72,8 @@ class map
         {
             _alloc = other._alloc;
             _size = other._size;
+            _comp = other._comp;
+            tree = other.tree;
             return (*this);
         }
         allocator_type get_allocator() const
@@ -81,9 +83,21 @@ class map
         /*Element access*/
         T& at( const Key& key )
         {
+            value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, o);
+            if (!node)
+                throw std::out_of_range("out of range");
+            return node->element->second;
              
         }
-        const T& at( const Key& key ) const{}
+        const T& at( const Key& key ) const
+        {
+            value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, o);
+            if (!node)
+                throw std::out_of_range("out of range");
+            return node->element->second;
+        }
         T& operator[]( const Key& key )
         {
                 value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
@@ -127,7 +141,10 @@ class map
         size_type size() const {return(_size);}
         size_type max_size() const{return (_alloc.max_size());}
         /*Modifiers*/
-        void clear(){}
+        void clear()
+        {
+            
+        }
         ft::pair<iterator, bool> insert( const value_type& value )
         {
             avlnode<value_type, Allocator>* node = tree.search(tree.root, value);
@@ -140,6 +157,7 @@ class map
         }
         iterator insert( iterator pos, const value_type& value )
         {
+            (void)pos;
             avlnode<value_type, Allocator>* node = tree.search(tree.root, value);
             if (!node) {
                 node = tree.insert(value);
@@ -159,7 +177,7 @@ class map
             }
         iterator erase( iterator pos )
         {
-            tree.deleteNode(pos->first);
+            tree.delete1(*pos);
             _size--;
             return (pos);
         }
@@ -167,7 +185,7 @@ class map
         {
             while (first != last)
             {
-                tree.deleteNode(first->first);
+                tree.delete1(*first);
                 first++;
                 _size--;
             }
@@ -175,24 +193,50 @@ class map
         }
         size_type erase( const Key& key )
         {
-            tree.deleteNode(key);
+            tree.delete1(key);
             _size--;
             return (1);
         }
-        void swap( map& other ){}
+        void swap( map& other )
+        {
+            map tmp = *this;
+            *this = other;
+            other = tmp;
+        }
         /*Lookup*/
         size_type count( const Key& key ) const
+        {
+            value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, o);
+            if (!node)
+                return (0);
+            return (1);
+        }
+        iterator find( const Key& key )
+        {
+            value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, o);
+            if (!node)
+                return (end());
+            return (iterator(node->element, &tree));
+        }
+        const_iterator find( const Key& key ) const
+        {
+            value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+            avlnode<value_type, Allocator>* node = tree.search(tree.root, o);
+            if (!node)
+                return (end());
+            return (const_iterator(node->element, &tree));    
+        }
+        ft::pair<iterator,iterator> equal_range( const Key& key )
         {}
-        iterator find( const Key& key ){}
-        const_iterator find( const Key& key ) const{}
-        ft::pair<iterator,iterator> equal_range( const Key& key ){}
-        ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const{}
-        iterator lower_bound( const Key& key ){}
-        const_iterator lower_bound( const Key& key ) const{}
-        iterator upper_bound( const Key& key ){}
-        const_iterator upper_bound( const Key& key ) const{}
+        // ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const{}
+        // iterator lower_bound( const Key& key ){}
+        // const_iterator lower_bound( const Key& key ) const{}
+        // iterator upper_bound( const Key& key ){}
+        // const_iterator upper_bound( const Key& key ) const{}
         /*Observers*/
-        key_compare key_comp() const{}
+        // key_compare key_comp() const{}
         // ft::map::value_compare value_comp() const{}
     protected:
         allocator_type _alloc;
@@ -201,28 +245,28 @@ class map
         avl<ft::pair<const key_type, mapped_type>, Compare, Allocator> tree;
         
 };
-template< class Key, class T, class Compare, class Alloc >
-bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
-                 const ft::map<Key,T,Compare,Alloc>& rhs )
-                 {}
-template< class Key, class T, class Compare, class Alloc >
-bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                 const ft::map<Key,T,Compare,Alloc>& rhs )
-                 {}
-template< class Key, class T, class Compare, class Alloc >
-bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
-                const ft::map<Key,T,Compare,Alloc>& rhs ){}
-template< class Key, class T, class Compare, class Alloc >
-bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
-template< class Key, class T, class Compare, class Alloc >
-bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
-                const ft::map<Key,T,Compare,Alloc>& rhs ){}
-template< class Key, class T, class Compare, class Alloc >
-bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
-template< class Key, class T, class Compare, class Alloc >
-void swap( ft::map<Key,T,Compare,Alloc>& lhs,
-           ft::map<Key,T,Compare,Alloc>& rhs ){}
+// template< class Key, class T, class Compare, class Alloc >
+// bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
+//                  const ft::map<Key,T,Compare,Alloc>& rhs )
+//                  {}
+// template< class Key, class T, class Compare, class Alloc >
+// bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
+//                  const ft::map<Key,T,Compare,Alloc>& rhs )
+//                  {}
+// template< class Key, class T, class Compare, class Alloc >
+// bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
+//                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
+// template< class Key, class T, class Compare, class Alloc >
+// bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
+//                  const ft::map<Key,T,Compare,Alloc>& rhs ){}
+// template< class Key, class T, class Compare, class Alloc >
+// bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
+//                 const ft::map<Key,T,Compare,Alloc>& rhs ){}
+// template< class Key, class T, class Compare, class Alloc >
+// bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
+//                  const ft::map<Key,T,Compare,Alloc>& rhs ){}
+// template< class Key, class T, class Compare, class Alloc >
+// void swap( ft::map<Key,T,Compare,Alloc>& lhs,
+//            ft::map<Key,T,Compare,Alloc>& rhs ){}
 }
 #endif
