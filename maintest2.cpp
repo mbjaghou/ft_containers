@@ -239,21 +239,21 @@ void	vector_main(void) {
 		cout << "\n";
 	}
 
-	// cout << "\033[0;32m** erase **\033[0m\n";
-	// {
-	// 	ft::vector<int> vect;
+	cout << "\033[0;32m** erase **\033[0m\n";
+	{
+		ft::vector<int> vect;
 
-	// 	for (int i = 1; i <= 10; ++i)
-	// 		vect.push_back(i);
+		for (int i = 1; i <= 10; ++i)
+			vect.push_back(i);
 
-	// 	vect.erase (vect.begin()+5);
-	// 	vect.erase (vect.begin(),vect.begin()+3);
+		vect.erase (vect.begin()+5);
+		vect.erase (vect.begin(),vect.begin()+3);
 
-	// 	cout << "the vector contains:";
-	// 	for (size_t i = 0; i < vect.size(); ++i)
-	// 		cout << ' ' << vect[i];
-	// 	cout << "\n";
-	// }
+		cout << "the vector contains:";
+		for (size_t i = 0; i < vect.size(); ++i)
+			cout << ' ' << vect[i];
+		cout << "\n";
+	}
 
 	cout << "\033[0;32m** push_back **\033[0m\n";
 	{
@@ -407,37 +407,37 @@ void	map_main(void) {
 		cout << "mp['d'] contains " << mp['d'] << "\n";
 	}
 
-	// cout << "\033[0;32m** Begin && end **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
+	cout << "\033[0;32m** Begin && end **\033[0m\n";
+	{
+		ft::map<char,int> mp;
 
-	// 	mp['b'] = 10;
-	// 	mp['a'] = 20;
-	// 	mp['c'] = 30;
+		mp['b'] = 10;
+		mp['a'] = 20;
+		mp['c'] = 30;
 
-	// 	for (ft::map<char,int>::iterator it = mp.begin(); it != mp.end(); ++it)
-	// 		cout << it->first << " = " << it->second << '\t';
-	// 	cout << " <-- iterator\n";
-	// 	for (ft::map<char,int>::const_iterator it = mp.begin(); it != mp.end(); ++it)
-	// 		cout << it->first << " = " << it->second << '\t';
-	// 	cout << " <-- const_iterator\n";
-	// }
+		for (ft::map<char,int>::iterator it = mp.begin(); it != mp.end(); ++it)
+			cout << it->first << " = " << it->second << '\t';
+		cout << " <-- iterator\n";
+		for (ft::map<char,int>::const_iterator it = mp.begin(); it != mp.end(); ++it)
+			cout << it->first << " = " << it->second << '\t';
+		cout << " <-- const_iterator\n";
+	}
 
-	// cout << "\033[0;32m** rbegin && rend **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
+	cout << "\033[0;32m** rbegin && rend **\033[0m\n";
+	{
+		ft::map<char,int> mp;
 
-	// 	mp['a'] = 10;
-	// 	mp['b'] = 20;
-	// 	mp['c'] = 30;
+		mp['a'] = 10;
+		mp['b'] = 20;
+		mp['c'] = 30;
 
-	// 	for (ft::map<char,int>::reverse_iterator rit = mp.rbegin(); rit != mp.rend(); ++rit)
-	// 		cout << rit->first << " = " << rit->second << '\t';
-	// 	cout << " <-- reverse_iterator\n";
-	// 	for (ft::map<char,int>::const_reverse_iterator rit = mp.rbegin(); rit != mp.rend(); ++rit)
-	// 		cout << rit->first << " = " << rit->second << '\t';
-	// 	cout << " <-- const_reverse_iterator\n";
-	// }
+		for (ft::map<char,int>::reverse_iterator rit = mp.rbegin(); rit != mp.rend(); ++rit)
+			cout << rit->first << " = " << rit->second << '\t';
+		cout << " <-- reverse_iterator\n";
+		for (ft::map<char,int>::const_reverse_iterator rit = mp.rbegin(); rit != mp.rend(); ++rit)
+			cout << rit->first << " = " << rit->second << '\t';
+		cout << " <-- const_reverse_iterator\n";
+	}
 
 	cout << "\033[0;32m** empty && size && max_size **\033[0m\n";
 	{
@@ -583,40 +583,40 @@ void	map_main(void) {
 		cout << '\n';
 	}
 	
-	// cout << "\033[0;32m** lower_bound && upper_bound **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
-	// 	ft::map<char,int>::iterator low, up;
+	cout << "\033[0;32m** lower_bound && upper_bound **\033[0m\n";
+	{
+		ft::map<char,int> mp;
+		ft::map<char,int>::iterator low, up;
 
-	// 	mp['a'] = 10;
-	// 	mp['b'] = 20;
-	// 	mp['c'] = 30;
-	// 	mp['d'] = 40;
-	// 	mp['e'] = 50;
+		mp['a'] = 10;
+		mp['b'] = 20;
+		mp['c'] = 30;
+		mp['d'] = 40;
+		mp['e'] = 50;
 
-	// 	low = mp.lower_bound('b');
-	// 	up = mp.upper_bound('c');
+		low = mp.lower_bound('b');
+		up = mp.upper_bound('c');
 
-	// 	cout << "The lower bound of 'b' : " << low->first << " = " << low->second << '\n';
-	// 	cout << "The upper bound of 'c' : " << up->first << " = " << up->second << '\n';
-	// }
+		cout << "The lower bound of 'b' : " << low->first << " = " << low->second << '\n';
+		cout << "The upper bound of 'c' : " << up->first << " = " << up->second << '\n';
+	}
 
-	// cout << "\033[0;32m** equal_range **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
+	cout << "\033[0;32m** equal_range **\033[0m\n";
+	{
+		ft::map<char,int> mp;
 
-	// 	mp['a'] = 10;
-	// 	mp['b'] = 20;
-	// 	mp['c'] = 30;
+		mp['a'] = 10;
+		mp['b'] = 20;
+		mp['c'] = 30;
 
-	// 	ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> pr;
-	// 	pr = mp.equal_range('b');
+		ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> pr;
+		pr = mp.equal_range('b');
 
-	// 	cout << "The lower bound of 'b' : ";
-	// 	cout << pr.first->first << " = " << pr.first->second << '\n';
-	// 	cout << "The upper bound of 'b' : ";
-	// 	cout << pr.second->first << " = " << pr.second->second << '\n';
-	// }
+		cout << "The lower bound of 'b' : ";
+		cout << pr.first->first << " = " << pr.first->second << '\n';
+		cout << "The upper bound of 'b' : ";
+		cout << pr.second->first << " = " << pr.second->second << '\n';
+	}
 
 	// cout << "\033[0;32m** key_comp **\033[0m\n";
 	// {
@@ -654,27 +654,27 @@ void	map_main(void) {
 	// 	cout << '\n';
 	// }
 
-	// cout << "\033[0;32m** relational operators **\033[0m\n";
-	// {
-	// 	ft::map<char, int> map1;
-	// 	ft::map<char, int> map2;
-	// 	map1['a'] = 10;
-	// 	map1['b'] = 20;
-	// 	map2['c'] = 30;
+	cout << "\033[0;32m** relational operators **\033[0m\n";
+	{
+		ft::map<char, int> map1;
+		ft::map<char, int> map2;
+		map1['a'] = 10;
+		map1['b'] = 20;
+		map2['c'] = 30;
 
-	// 	if (map1 == map2)
-	// 		cout << "map1 and map2 are equal\n";
-	// 	if (map1 != map2)
-	// 		cout << "map1 and map2 are not equal\n";
-	// 	if (map1 < map2)
-	// 		cout << "map1 is less than map2\n";
-	// 	if (map1 > map2)
-	// 		cout << "map1 is greater than map2\n";
-	// 	if (map1 <= map2)
-	// 		cout << "map1 is less than or equal to map2\n";
-	// 	if (map1 >= map2)
-	// 		cout << "map1 is greater than or equal to map2\n";
-	// }
+		if (map1 == map2)
+			cout << "map1 and map2 are equal\n";
+		if (map1 != map2)
+			cout << "map1 and map2 are not equal\n";
+		if (map1 < map2)
+			cout << "map1 is less than map2\n";
+		if (map1 > map2)
+			cout << "map1 is greater than map2\n";
+		if (map1 <= map2)
+			cout << "map1 is less than or equal to map2\n";
+		if (map1 >= map2)
+			cout << "map1 is greater than or equal to map2\n";
+	}
 
 	cout << "\033[0;32m** swap (non-member) **\033[0m\n";
 	{

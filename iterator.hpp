@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/27 14:40:52 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:58:42 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ template <class Iterator> class reverse_iterator
         reverse_iterator& operator--(){++t; return (*this);}
         reverse_iterator operator++( int ){reverse_iterator tmp = *this; --t; return (tmp);}
         reverse_iterator operator--( int ){reverse_iterator tmp = *this; ++t; return (tmp);}
-        protected:
         iterator_type t;
+        protected:
     
 };
 template< class Iterator1, class Iterator2 >
