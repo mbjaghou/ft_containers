@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/26 14:09:16 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:40:52 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,11 @@ class bidirectional_iterator
         {return (p != rhs.p);}
         bool operator==( const bidirectional_iterator & rhs)
         {return (p != rhs.p);}
+
+
+        
+        operator bidirectional_iterator<const T, cop, AL> () const {
+			return bidirectional_iterator<const T, cop, AL>(p, reinterpret_cast<const avl<const value_type, cop, AL>*>(tree));}
     private:
         pointer p;
         const avl<T, cop, AL> *tree;

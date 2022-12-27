@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/26 18:14:31 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:48:58 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ namespace ft
                     if (root != NULL)
                     {
                         preOrder(root->left);
+                        alloc.destroy(root->element);
                         preOrder(root->right);
+                        alloc.destroy(root->element);
+                        root = NULL;
                     }
                 }
                 avlnode<T, AL> *insert(const T &key)
