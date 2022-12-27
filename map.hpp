@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/27 14:50:19 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:53:24 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "lexicographical_compare.hpp"
 #include "distance.hpp"
 #include "equal.hpp"
+#include "vector.hpp"
 
 namespace ft
 {
@@ -44,7 +45,22 @@ class map
         typedef ft::reverse_iterator<const_iterator>                                   const_reverse_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type                difference_type;
         typedef size_t                                                                 size_type;
-
+        
+        class value_compare : public std::binary_function<value_type,value_type,bool>
+        {
+            friend class map;
+            protected:
+                Compare comp;
+                value_compare (Compare c) : comp(c) {}
+            public:
+                typedef bool result_type;
+                typedef value_type first_argument_type;
+                typedef value_type second_argument_type;
+                bool operator() (const value_type& x, const value_type& y) const
+                {
+                    return comp(x.first, y.first);
+                }
+        };
         /*Member functions*/
         map(): _size(0){}
         ~map(){}
@@ -181,23 +197,27 @@ class map
             }
         void erase( iterator pos )
         {
-            if(tree.delete1(*pos))
-                _size--;
+            tree.delete1(*pos);
+            _size--;
         }
         void erase( iterator first, iterator last )
         {
+            ft::vector<key_type> v;
             while (first != last)
             {
-                tree.delete1(*first);
+                v.push_back(first->first);
                 first++;
-                _size--;
             }
+            for (size_t i = 0; i < v.size(); i++)
+                erase(v[i]);
         }
         size_type erase( const Key& key )
         {
-            tree.delete1(key);
-            _size--;
-            return (1);
+            value_type	o = ft::make_pair<const key_type, mapped_type>(key, mapped_type());
+            size_type n = tree.delete1(o);
+            if (n)
+                _size--;
+            return (n);
         }
         void swap( map& other )
         {
@@ -297,8 +317,14 @@ class map
             return res ? iterator(res->element, &tree) : iterator(NULL, &tree);
         }
         /*Observers*/
-        // key_compare key_comp() const{}
-        // ft::map::value_compare value_comp() const{}
+        key_compare key_comp() const
+        {
+            return (_comp);
+        }
+        value_compare value_comp() const
+        {
+            return (value_compare(_comp));   
+        }
     protected:
         allocator_type _alloc;
         size_type      _size;

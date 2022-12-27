@@ -510,28 +510,28 @@ void	map_main(void) {
 		cout << " <-- map2\n";
 	}
 	
-	// cout << "\033[0;32m** erase **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
+	cout << "\033[0;32m** erase **\033[0m\n";
+	{
+		ft::map<char,int> mp;
 
-	// 	mp['a'] = 10;
-	// 	mp['b'] = 20;
-	// 	mp['c'] = 30;
-	// 	mp['d'] = 40;
-	// 	mp['e'] = 50;
-	// 	mp['f'] = 60;
+		mp['a'] = 10;
+		mp['b'] = 20;
+		mp['c'] = 30;
+		mp['d'] = 40;
+		mp['e'] = 50;
+		mp['f'] = 60;
 
-	// 	ft::map<char,int>::iterator it = mp.find('b');
-	// 	mp.erase(it);
-	// 	mp.erase('c');
+		ft::map<char,int>::iterator it = mp.find('b');
+		mp.erase(it);
+		mp.erase('c');
 
-	// 	it = mp.find('e');
-	// 	mp.erase(it, mp.end());
+		it = mp.find('e');
+		// mp.erase(it, mp.end());
 
-	// 	for (it = mp.begin(); it != mp.end(); ++it)
-	// 		cout << it->first << " = " << it->second << '\t';
-	// 	cout << "\n";
-	// }
+		for (it = mp.begin(); it != mp.end(); ++it)
+			cout << it->first << " = " << it->second << '\t';
+		cout << "\n";
+	}
 
 	cout << "\033[0;32m** swap **\033[0m\n";
 	{
@@ -618,41 +618,41 @@ void	map_main(void) {
 		cout << pr.second->first << " = " << pr.second->second << '\n';
 	}
 
-	// cout << "\033[0;32m** key_comp **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
+	cout << "\033[0;32m** key_comp **\033[0m\n";
+	{
+		ft::map<char,int> mp;
 
-	// 	ft::map<char,int>::key_compare cmpfun = mp.key_comp();
+		ft::map<char,int>::key_compare cmpfun = mp.key_comp();
 
-	// 	mp['a'] = 20;
-	// 	mp['b'] = 10;
-	// 	mp['c'] = 30;
+		mp['a'] = 20;
+		mp['b'] = 10;
+		mp['c'] = 30;
 
-	// 	char last = mp.rbegin()->first;
+		char last = mp.rbegin()->first;
 
-	// 	ft::map<char,int>::iterator it = mp.begin();
-	// 	do {
-	// 		cout << it->first << " = " << it->second << '\t';
-	// 	} while (cmpfun((*it++).first, last));
-	// 	cout << '\n';
-	// }
+		ft::map<char,int>::iterator it = mp.begin();
+		do {
+			cout << it->first << " = " << it->second << '\t';
+		} while (cmpfun((*it++).first, last));
+		cout << '\n';
+	}
 
-	// cout << "\033[0;32m** value_comp **\033[0m\n";
-	// {
-	// 	ft::map<char,int> mp;
+	cout << "\033[0;32m** value_comp **\033[0m\n";
+	{
+		ft::map<char,int> mp;
 
-	// 	mp['a'] = 20;
-	// 	mp['b'] = 10;
-	// 	mp['c'] = 30;
+		mp['a'] = 20;
+		mp['b'] = 10;
+		mp['c'] = 30;
 
-	// 	ft::pair<char,int> last = *mp.rbegin();
+		ft::pair<char,int> last = *mp.rbegin();
 
-	// 	ft::map<char,int>::iterator it = mp.begin();
-	// 	do {
-	// 		cout << it->first << " = " << it->second << '\t';
-	// 	} while (mp.value_comp()(*it++, last));
-	// 	cout << '\n';
-	// }
+		ft::map<char,int>::iterator it = mp.begin();
+		do {
+			cout << it->first << " = " << it->second << '\t';
+		} while (mp.value_comp()(*it++, last));
+		cout << '\n';
+	}
 
 	cout << "\033[0;32m** relational operators **\033[0m\n";
 	{
