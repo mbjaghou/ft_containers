@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/28 17:30:55 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:31:51 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -642,6 +642,30 @@ void ft_map()
 
         ft::map<int, int>::iterator it = map.upper_bound(40);
         cout << it->first  << "    " << it->second << endl;
+    }
+    std::cout << "Observers key_comp" << std::endl;
+    {
+        ft::map<char, int> map;
+        ft::map<char, int>::key_compare comp = map.key_comp();
+
+        map['a'] = 10;
+        map['b'] = 20;
+        map['c'] = 30;
+        map['d'] = 40;
+    
+        cout << "Map has the elements\n";
+    
+        char l = map.rbegin()->first;
+        ft::map<char, int>::iterator it = map.begin();
+        do {
+    
+            cout << it->first << " => " << it->second << '\n';
+        } while (comp((*it++).first, l));
+    
+    }   
+    std::cout << "Observers value_comp" << std::endl;
+    {
+        
     }
     cout << "Non-member functions operator" << endl;
     {
