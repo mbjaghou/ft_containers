@@ -6,13 +6,14 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/17 11:20:33 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:30:55 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.hpp"
 #include "vector.hpp"
 #include <iostream>
+#include "map.hpp"
 
 using namespace std;
 void ft_vector()
@@ -126,8 +127,9 @@ void ft_vector()
 
         for (size_t i = 0; i < obj.size(); ++i)
             obj[i] = i + 1;
-
-        for (ft::vector<int>::reverse_iterator it = obj.rbegin(); it != obj.rend(); ++it)
+        ft::vector<int>::reverse_iterator it = obj.rbegin();
+    
+        for (; it != obj.rend(); ++it)
             cout << *it << " ";
         cout << endl;
     }
@@ -371,19 +373,341 @@ void ft_stack()
    
     while (!stack.empty()) {
         cout << stack.top() <<" ";
-        stack.pop();
+        stack.pop() ;
+    }
+    cout << endl;
+}
+
+void ft_map()
+{
+    cout << "constructing map" << endl;
+    {
+        ft::map<char, int> map;
+
+        map['a'] = 1;
+        map['b'] = 2;
+        map['c'] = 3;
+        ft::map<char, int> map1(map.begin(), map.end());
+
+        ft::map<char, int> map2;
+
+        map2 = map1;
+
+        ft::map<char, int>::iterator it = map2.begin();
+
+        for(; it != map2.end(); it++)
+        {
+            cout << it->first << " " << it->second << endl;
+        }
+    }
+    cout << "iterator begin , end" << endl;
+    {
+        ft::map<int, int> map;
+
+        map[10] = 100;
+        map[11] = 200;
+        map[5] = 78;
+
+        ft::map<int, int>::iterator be = map.begin();
+
+        cout << "iteartor begin -> " << be->first << " " << be->second << endl;
+
+        for(; be != map.end(); be++)
+            cout << be->first << " " << be->second << endl;
+    }
+    cout << "iterator rbegin , rend" << endl;
+    {
+        ft::map<int, int> map;
+
+        map[10] = 10;
+        map[20] = 10;
+        map[30] = 10;
+        map[40] = 10;
+
+        ft::map<int, int>::reverse_iterator it = map.rbegin();
+        for (; it != map.rend(); it++)
+            cout << it->first << " " << it->second << endl;
+    }
+    // cout << "capacity empty, size, max size error in max size???????????" << endl;
+    // {
+    //     ft::map<int, int> map;
+
+    //     map[10] = 10;
+    //     map[20] = 10;
+    //     map[30] = 10;
+    //     map[40] = 10;
+
+    //     cout << "size map = " << map.size() << endl;
+    //     cout << "max size = " << map.max_size() << endl;
+
+    //     if (map.empty())
+    //         cout << "is empty" << endl;
+    //     else
+    //         cout << "is not" << endl;
+    // }
+    cout << "Element access: operator[], at" << endl;
+    {
+            ft::map<const char,int> mymap;
+
+            mymap.insert(ft::make_pair<const char, int>('a', 1));
+            mymap['b'] = 2;
+            mymap['c'] = 3;
+
+            cout << "mymap['a'] is " << mymap['a'] << '\n';
+            cout << "mymap['b'] is " << mymap['b'] << '\n';
+            cout << "mymap['c'] is " << mymap['c'] << '\n';
+            cout << "mymap now contains " << mymap.size() << " elements.\n";
+
+
+            ft::map<char, int> map(mymap.begin(), mymap.end());
+
+            cout << "at   a=> " << map.at('a') << endl;
+            cout << "at   b=> " << map.at('b') << endl;
+            cout << "at   c=> " << map.at('c') << endl;
+    }
+    // cout << "Modifiers insert white error???????????" << endl;
+    // {
+    //     ft::map<int, int> map;
+    //     ft::map<int, int> map1;
+
+    //     map[1] = 122;
+    //     map[2] = 20;
+    //     map[3] = 30;
+    //     map[4] = 40;
+    //     // ft::pair<ft::map<int, int>::iterator, bool> pair;
+
+    //     // pair = map.insert(ft::pair<int, int>(10, 15));
+    //     // if (!pair.second)
+    //     //     cout << "hello\n";
+    //     // else
+    //     //     cout << "word\n";
+        
+    //     // ft::map<int, int>::iterator it = map.begin();
+    //     // for(; it != map.end(); ++it)
+    //     //     cout << it->first << "   " << it->second << endl;
+
+    //     map.insert(map1.begin(), map1.end());
+    //     ft::map<int, int>::iterator it = map.begin();
+    //     for(; it != map.end(); ++it) 
+    //       cout << it->first << "      "  << it->second << endl;
+
+    // }
+    cout << "Modifiers erase" << endl;
+    {
+        ft::map<int, int> map;
+
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+
+        ft::map<int, int>::iterator it = map.begin();
+
+        for (;it != map.end(); ++it)
+            cout << it->first << "    " << it->second << endl;
+
+        map.erase(map.begin());
+        cout << "after erase white give hime the position" << endl;
+        ft::map<int, int>::iterator it1 = map.begin();
+        for (;it1 != map.end(); ++it1)
+            cout << it1->first << "    " << it1->second << endl;
+
+
+        map.erase(20);
+        cout << "after erase white give hime the key_type" << endl;
+        ft::map<int, int>::iterator it2 = map.begin();
+        for (;it2 != map.end(); ++it2)
+            cout << it2->first << "    " << it2->second << endl;
+
+        cout << "after erase white give hime the first and last" << endl;
+        map.erase(map.begin(), map.end());
+        ft::map<int, int>::iterator it3 = map.begin();
+        for (;it3 != map.end(); ++it3)
+            cout << it3->first << "    " << it3->second << endl;
+        cout << "is clean" << endl;
+    }
+    cout << "Modifiers clear" << endl;
+    {
+        ft::map<char, char> map;
+
+        map['a'] = 'b';
+        map['b'] = 'c';
+        map['j'] = 'o';
+
+        ft::map<char, char>::iterator it = map.begin();
+        for (;it != map.end(); ++it)
+            cout << it->first << "    " << it->second << endl;
+        map.clear();
+        ft::map<char, char>::iterator it2 = map.begin();
+        for (;it2 != map.end(); ++it2)
+            cout << it2->first << "    " << it2->second << endl;
+        cout << "after clear" << endl;
+    }
+    cout << "Modifiers swap" << endl;
+    {
+        ft::map<int, int> map;
+
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+
+        ft::map<int, int> map1;
+        map1[60] = 60;
+        map1[70] = 70;
+        map1[80] = 80;
+        map1[90] = 90;
+        map1[100] = 100;
+        
+        map1.swap(map);
+
+        ft::map<int, int>::iterator it2 = map.begin();
+        
+        for (; it2 != map.end(); ++it2)
+            cout << it2->first << "     " << it2->second << endl;
+
+        ft::map<int, int>::iterator it = map1.begin();
+        
+        for (; it != map1.end(); ++it)
+            cout << it->first << "     " << it->second << endl;
+    }
+    cout << "Lookup count" << endl;
+    {
+        ft::map<char, int> mymap;
+        char c;
+        mymap ['a']=101;
+        mymap ['c']=202;
+        mymap ['f']=303;
+
+        for (c='a'; c<'h'; c++)
+        {
+            cout << c;
+            if (mymap.count(c)>0)
+            cout << " is an element of mymap.\n";
+            else 
+            cout << " is not an element of mymap.\n";
+        }
+    }
+    // cout << "lookup find    segmentation ??????????" << endl;
+    // {
+    //     ft::map<int, int> map;
+    //     map[10] = 10;
+    //     map[20] = 20;
+    //     map[30] = 30;
+    //     map[40] = 40;
+    //     map[50] = 50;
+
+    //     ft::map<int, int>::iterator it = map.find(30);
+    //     for (; it != map.end(); ++it)
+    //         cout << it->first << "    " << it->second << endl;
+    // }
+    cout << "lookup equal_range" << endl;
+    {
+        ft::map<int, int> map;
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+
+        ft::pair<ft::map<int, int>::iterator , ft::map<int, int>::iterator> pair;
+
+        pair = map.equal_range(10);
+        cout << pair.first->first << "   "  << pair.first->second << "   " 
+        << pair.second->first << "   " << pair.second->second <<  endl;
+    }
+    cout << "lookup lower_bound" << endl;
+    {
+        ft::map<int, int> map;
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+
+        ft::map<int, int>::iterator it = map.lower_bound(20);
+        cout << it->first  << "    " << it->second << endl;
+
+    }
+    cout << "lookup upper_bound" << endl;
+    {
+        ft::map<int, int> map;
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+
+        ft::map<int, int>::iterator it = map.upper_bound(40);
+        cout << it->first  << "    " << it->second << endl;
+    }
+    cout << "Non-member functions operator" << endl;
+    {
+        ft::map<int, int> map;
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+        ft::map<int, int> map1(map);
+        ft::map<int, int> map2;
+        map2[60] = 10;
+        map2[70] = 20;
+        map2[80] = 30;
+        map2[90] = 40;
+        map2[100] = 50;
+        if (map == map1)
+            cout << "operator == " << endl;
+        if (map != map2)
+            cout << "operator != " << endl;
+        if (map < map2)
+            cout << "operator < " << endl;
+        if (map2 > map)
+            cout << "operator > " << endl;
+        if (map >= map1)
+            cout << "operator >= " << endl;
+        if (map <= map1)
+            cout << "operator <= " << endl;
+    }
+    cout << "Non-member functions swap" << endl;
+    {
+        ft::map<int, int> map;
+
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
+
+        ft::map<int, int> map1;
+        map1[60] = 60;
+        map1[70] = 70;
+        map1[80] = 80;
+        map1[90] = 90;
+        map1[100] = 100;
+        
+        swap(map1, map);
+
+        ft::map<int, int>::iterator it2 = map.begin();
+        
+        for (; it2 != map.end(); ++it2)
+            cout << it2->first << "     " << it2->second << endl;
+
+        ft::map<int, int>::iterator it = map1.begin();
+        
+        for (; it != map1.end(); ++it)
+            cout << it->first << "     " << it->second << endl;
     }
 }
-#include "pair.hpp"
 
 int main()
 {
-//     ft::pair<char, int> pr = ft::make_pair<char, int>('c', 6);
-// ft::pair<char, int> pr1(pr);
-//     std::cout << pr1.first << ' ' << pr1.second << '\n';
-    
     cout << "\033[41mvector testing\033[0m" << endl;
     ft_vector();
     cout << "\033[41mstack testing\033[0m" << endl;
     ft_stack();
+    std::cout << "\033[41mtesting map\033[0m" << std::endl;
+    ft_map();
 }

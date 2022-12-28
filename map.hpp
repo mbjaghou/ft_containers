@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/27 18:53:24 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:24:29 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ class map
         typedef T                                                                      mapped_type;
         typedef ft::pair<const key_type,mapped_type>                                   value_type;
         typedef Compare                                                                key_compare;
-        // typedef typename std::map::value_comp                                          value_compare;
         typedef Allocator                                                              allocator_type;
         typedef typename allocator_type::reference	                                   reference;
         typedef typename allocator_type::const_reference	                           const_reference;
@@ -44,7 +43,7 @@ class map
         typedef ft::reverse_iterator<iterator>                                         reverse_iterator;
         typedef ft::reverse_iterator<const_iterator>                                   const_reverse_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type                difference_type;
-        typedef size_t                                                                 size_type;
+        typedef std::size_t                                                                 size_type;
         
         class value_compare : public std::binary_function<value_type,value_type,bool>
         {
@@ -62,9 +61,8 @@ class map
                 }
         };
         /*Member functions*/
-        map(): _size(0){}
         ~map(){}
-        explicit map( const Compare& comp, const Allocator& alloc = Allocator() )
+        explicit map( const Compare& comp = key_compare(), const Allocator& alloc = allocator_type() )
         {
             _alloc = alloc;
             _comp = comp;
@@ -73,6 +71,7 @@ class map
         template< class InputIt >
             map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() )
             {
+               
                 _alloc = alloc;
                 _size = ft::distance(first, last);
                 _comp = comp;
@@ -86,6 +85,7 @@ class map
         {
             *this = other;
         }
+        
         map& operator=( const map& other )
         {
             _alloc = other._alloc;
@@ -167,6 +167,7 @@ class map
         }
         ft::pair<iterator, bool> insert( const value_type& value )
         {
+             
             avlnode<value_type, Allocator>* node = tree.search(tree.root, value);
             if (!node) {
                 node = tree.insert(value);
@@ -197,8 +198,8 @@ class map
             }
         void erase( iterator pos )
         {
-            tree.delete1(*pos);
-            _size--;
+            if(tree.delete1(*pos))
+                _size--;
         }
         void erase( iterator first, iterator last )
         {
@@ -263,7 +264,7 @@ class map
             avlnode<value_type, Allocator>*	rootTmp = tree.root;	
 			avlnode<value_type, Allocator>*	res = tree.root;
 			while (rootTmp) {
-				if (!_comp(key, rootTmp->element->first)) {
+				if (!_comp( rootTmp->element->first, key)) {
 					res = rootTmp;
 					rootTmp = rootTmp->left;
 				}
@@ -277,7 +278,7 @@ class map
             avlnode<value_type, Allocator>*	rootTmp = tree.root;	
 			avlnode<value_type, Allocator>*	res = tree.root;
 			while (rootTmp) {
-				if (!_comp(key, rootTmp->element->first)) {
+				if (!_comp(rootTmp->element->first, key)) {
 					res = rootTmp;
 					rootTmp = rootTmp->left;
 				}

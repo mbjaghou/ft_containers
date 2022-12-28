@@ -6,7 +6,7 @@ INCLUDE = equal.hpp is_integral.hpp vector.hpp lexicographical_compare.hpp itera
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC =	maintest2.cpp\
+SRC =	main.cpp\
 
 
 OBJ = main.o \

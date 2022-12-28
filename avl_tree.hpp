@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/27 14:48:58 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:56:25 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ namespace ft
                 }
                 avl &operator=(const avl &obj)
                 {
+                     
                     root = obj.root;
                     _comp = obj._comp;
                     alloc = obj.alloc;
