@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/11/29 08:47:21 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:13:41 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,27 @@ class vector
         {
             for (size_type i = 0; i < _size; i++)
                 _alloc.destroy(p + i);
-            if (_capacity == 0)
+            if (_capacity)
                 _alloc.deallocate(p, _capacity);
         }
         vector (const vector& x){
+            _capacity = 0;
+            _size = 0;
             *this = x;
         }
         vector& operator=( const vector& other )
         {
-            p = other.p;
+            for (size_type i = 0; i < _size; i++)
+                _alloc.destroy(p + i);
+            if(_capacity)
+                _alloc.deallocate(p, _capacity);
             _capacity = other._capacity;
             _size = other._size;
             _alloc = other._alloc;
+            if (_capacity)
+                p = _alloc.allocate(_capacity);
+            for (size_type i = 0; i < _size; ++i)
+                _alloc.construct(p + i, other.p[i]);
             return (*this);
         }
         allocator_type get_allocator() const{return (this->_alloc);}
@@ -123,7 +132,8 @@ class vector
                     _alloc.construct(tmp_p + i, p[i]);
                 for (size_type i = 0; i < _size; i++)
                     _alloc.destroy(this->p + i);
-                _alloc.deallocate(this->p , this->_capacity);
+                if (_capacity)
+                    _alloc.deallocate(this->p , this->_capacity);
                 this->p = tmp_p;
                 this->_capacity = new_cap;
             }

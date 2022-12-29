@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:30:37 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 17:36:49 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:49:37 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "map.hpp"
 
 using namespace std;
-void ft_vector()
+void std_vector()
 {
     cout << "\033[32m---------------->constructs the vector---------------->\033[0m" << endl;
     {
@@ -361,25 +361,23 @@ void ft_vector()
     }
 }
 
-void ft_stack()
+void std_stack()
 {
     std::stack<int> stack;
     stack.push(21);
     stack.push(22);
     stack.push(24);
     stack.push(25);
-       
-    stack.pop();
-    stack.pop();
    
     while (!stack.empty()) {
         cout << stack.top() <<" ";
         stack.pop() ;
     }
     cout << endl;
+    cout << "size now = "<< stack.size() << endl;
 }
 
-void ft_map()
+void std_map()
 {
     cout << "constructing map" << endl;
     {
@@ -746,9 +744,9 @@ void ft_map()
 int main()
 {
     cout << "\033[41mvector testing\033[0m" << endl;
-    ft_vector();
+    std_vector();
     cout << "\033[41mstack testing\033[0m" << endl;
-    ft_stack();
+    std_stack();
     std::cout << "\033[41mtesting map\033[0m" << std::endl;
-    ft_map();
+    std_map();
 }

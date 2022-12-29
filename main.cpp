@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 15:45:22 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:15:15 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -367,15 +367,13 @@ void ft_stack()
     stack.push(22);
     stack.push(24);
     stack.push(25);
-       
-    stack.pop();
-    stack.pop();
    
     while (!stack.empty()) {
         cout << stack.top() <<" ";
         stack.pop() ;
     }
     cout << endl;
+    cout << "size now = "<< stack.size() << endl;
 }
 
 void ft_map()
@@ -750,4 +748,5 @@ int main()
     ft_stack();
     std::cout << "\033[41mtesting map\033[0m" << std::endl;
     ft_map();
+
 }
