@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:57:32 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/27 14:38:32 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:28:36 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct pair
         pair(): first(0), second(0){}
         pair( const T1& x, const T2& y ): first(x), second(y){}
         template< class U1, class U2 >
-            pair( const pair<U1, U2>& p ) : first(p.first), second(p.first){}
+            pair( const pair<U1, U2>& p ) : first(p.first), second(p.second){}
         pair( const pair& p ): first(p.first), second(p.second){}
         pair& operator=( const pair& other )
         {

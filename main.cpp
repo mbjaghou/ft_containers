@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/28 18:31:51 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:39:45 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,23 +428,23 @@ void ft_map()
         for (; it != map.rend(); it++)
             cout << it->first << " " << it->second << endl;
     }
-    // cout << "capacity empty, size, max size error in max size???????????" << endl;
-    // {
-    //     ft::map<int, int> map;
+    cout << "capacity empty, size, max size" << endl;
+    {
+        ft::map<int, int> map;
 
-    //     map[10] = 10;
-    //     map[20] = 10;
-    //     map[30] = 10;
-    //     map[40] = 10;
+        map[10] = 10;
+        map[20] = 10;
+        map[30] = 10;
+        map[40] = 10;
 
-    //     cout << "size map = " << map.size() << endl;
-    //     cout << "max size = " << map.max_size() << endl;
+        cout << "size map = " << map.size() << endl;
+        cout << "max size = " << map.max_size() << endl;
 
-    //     if (map.empty())
-    //         cout << "is empty" << endl;
-    //     else
-    //         cout << "is not" << endl;
-    // }
+        if (map.empty())
+            cout << "is empty" << endl;
+        else
+            cout << "is not" << endl;
+    }
     cout << "Element access: operator[], at" << endl;
     {
             ft::map<const char,int> mymap;
@@ -465,33 +465,36 @@ void ft_map()
             cout << "at   b=> " << map.at('b') << endl;
             cout << "at   c=> " << map.at('c') << endl;
     }
-    // cout << "Modifiers insert white error???????????" << endl;
-    // {
-    //     ft::map<int, int> map;
-    //     ft::map<int, int> map1;
+    cout << "Modifiers insert" << endl;
+    {
+        ft::map<int, int> map;
+        ft::map<int, int> map1;
 
-    //     map[1] = 122;
-    //     map[2] = 20;
-    //     map[3] = 30;
-    //     map[4] = 40;
-    //     // ft::pair<ft::map<int, int>::iterator, bool> pair;
+        map1[60] = 60;
+        map1[70] = 70;
+        map1[80] = 80;
+        map1[90] = 90;
 
-    //     // pair = map.insert(ft::pair<int, int>(10, 15));
-    //     // if (!pair.second)
-    //     //     cout << "hello\n";
-    //     // else
-    //     //     cout << "word\n";
-        
-    //     // ft::map<int, int>::iterator it = map.begin();
-    //     // for(; it != map.end(); ++it)
-    //     //     cout << it->first << "   " << it->second << endl;
+        map[1] = 122;
+        map[2] = 20;
+        map[3] = 30;
+        map[4] = 40;
+        ft::pair<ft::map<int, int>::iterator, bool> pair;
 
-    //     map.insert(map1.begin(), map1.end());
-    //     ft::map<int, int>::iterator it = map.begin();
-    //     for(; it != map.end(); ++it) 
-    //       cout << it->first << "      "  << it->second << endl;
+        pair = map.insert(ft::pair<int, int>(5, 18));
+        if (pair.second)
+            cout << "true\n";
+        else
+            cout << "false\n";
 
-    // }
+        map.insert(map1.begin(), map1.end());
+
+        map.insert(map.begin(), ft::pair<int, int>(100, 1000));
+        ft::map<int, int>::iterator it2 = map.begin();
+        for(; it2 != map.end(); ++it2) 
+          cout << it2->first << "      "  << it2->second << endl;
+
+    }
     cout << "Modifiers erase" << endl;
     {
         ft::map<int, int> map;
@@ -590,19 +593,19 @@ void ft_map()
             cout << " is not an element of mymap.\n";
         }
     }
-    // cout << "lookup find    segmentation ??????????" << endl;
-    // {
-    //     ft::map<int, int> map;
-    //     map[10] = 10;
-    //     map[20] = 20;
-    //     map[30] = 30;
-    //     map[40] = 40;
-    //     map[50] = 50;
+    cout << "lookup find" << endl;
+    {
+        ft::map<int, int> map;
+        map[10] = 10;
+        map[20] = 20;
+        map[30] = 30;
+        map[40] = 40;
+        map[50] = 50;
 
-    //     ft::map<int, int>::iterator it = map.find(30);
-    //     for (; it != map.end(); ++it)
-    //         cout << it->first << "    " << it->second << endl;
-    // }
+        for (ft::map<int, int>::iterator itr = map.find(20); itr != map.end(); itr++) {
+                cout << itr->first << '\t' << itr->second << '\n';
+    }
+    }
     cout << "lookup equal_range" << endl;
     {
         ft::map<int, int> map;

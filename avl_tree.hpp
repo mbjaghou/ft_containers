@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/28 14:56:25 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:10:09 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,6 +325,10 @@ namespace ft
                         predecessor = node->parent;
                     }
                     return predecessor;
+                }
+                size_t max_size() const
+                {
+                    return _Alloc_type.max_size();
                 }
         };
 }

@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/28 17:24:29 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:28:20 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ class map
             return (false);
         }
         size_type size() const {return(_size);}
-        size_type max_size() const{return (_alloc.max_size());}
+        size_type max_size() const{return (tree.max_size());}
         /*Modifiers*/
         void clear()
         {
