@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 20:15:15 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:25:49 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -748,5 +748,5 @@ int main()
     ft_stack();
     std::cout << "\033[41mtesting map\033[0m" << std::endl;
     ft_map();
-
+    while (1);
 }

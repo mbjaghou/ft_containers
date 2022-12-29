@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 16:42:28 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 21:19:50 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,9 @@ template <class Iterator> class reverse_iterator
         typedef typename ft::iterator_traits<Iterator>::reference	        reference;
         reverse_iterator(){};
         explicit reverse_iterator( iterator_type x )
-        {this->t = x;}
+        {
+            this->t = x;
+        }
         template< class U >
         reverse_iterator( const reverse_iterator<U>& other ){*this = other;}
         template< class U >
