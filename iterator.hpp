@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:24:38 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/28 12:01:17 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:42:28 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,14 @@ template <class Iterator> class reverse_iterator
         typedef typename ft::iterator_traits<Iterator>::pointer	            pointer;
         typedef typename ft::iterator_traits<Iterator>::reference	        reference;
         reverse_iterator(){};
-        explicit reverse_iterator( iterator_type x ){this->t = x;}
+        explicit reverse_iterator( iterator_type x )
+        {this->t = x;}
         template< class U >
         reverse_iterator( const reverse_iterator<U>& other ){*this = other;}
         template< class U >
         reverse_iterator& operator=( const reverse_iterator<U>& other )
         {
+            
             this->t = other.base();
             return (*this);
         }
@@ -180,7 +182,10 @@ class bidirectional_iterator
         bidirectional_iterator(pointer p, const avl<T, cop, AL> *tree = NULL) : p(p), tree(tree){}
         ~bidirectional_iterator(){}
         bidirectional_iterator(const bidirectional_iterator &obj): p(obj.p), tree(obj.tree){}
-        bidirectional_iterator &operator=(const bidirectional_iterator &obj){p = obj.p; tree = obj.tree; return *this;}
+        bidirectional_iterator &operator=(const bidirectional_iterator &obj)
+        {
+            p = obj.p; tree = obj.tree; return *this;
+        }
         reference operator*() {return (*p);}
         pointer operator->(void) {return &(operator*());}
         bidirectional_iterator& operator++ ()
@@ -206,6 +211,7 @@ class bidirectional_iterator
         }
         bidirectional_iterator& operator-- ()
         {
+            
             if (!p) {
 				if (tree->root->right)
 					p = tree->maxValueNode(tree->root->right)->element;
@@ -243,7 +249,7 @@ class bidirectional_iterator
 			return bidirectional_iterator<const T, cop, AL>(p, reinterpret_cast<const avl<const value_type, cop, AL>*>(tree));}
     private:
         pointer p;
-        const avl<T, cop, AL> *tree;
+        const avl<value_type, cop, AL> *tree;
 };
 }
 
