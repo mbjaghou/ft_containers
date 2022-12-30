@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:15 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/30 16:31:37 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/30 18:03:58 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ class vector
             size_t o = ft::distance(position, end());
             vector<value_type> tmp;
             tmp.assign(position, end());
-            for (size_t i = o; i < _size; ++i)
+            for (size_t i = 0; i < _size; ++i)
                 _alloc.destroy(p + i);
             _size -= o;
             push_back(val);
@@ -198,7 +198,7 @@ class vector
             tmp.assign(position, end());
 	        if (n + _size > _capacity)
 		        reserve(n + _size);
-            for (size_t i = o; i < _size; ++i)
+            for (size_t i = 0; i < _size; ++i)
                 _alloc.destroy(p + i);
             _size -= o;
             for (size_t i = 0; i < n; ++i)

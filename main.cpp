@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/30 16:30:59 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:02:43 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void ft_vector()
         obj.push_back(5);
 
         obj.insert(obj.begin() + 2, 80);
+        std::cout << obj.size() << std::endl;
         ft::vector<int>::iterator it;
         for (it = obj.begin(); it != obj.end(); ++it)
             cout << *it << " ";
@@ -214,6 +215,7 @@ void ft_vector()
         obj.push_back(5);
 
         obj.insert(obj.begin() + 2, 5, 80);
+        std::cout << obj.size() << std::endl;
         ft::vector<int>::iterator it;
         for (it = obj.begin(); it != obj.end(); ++it)
             cout << *it << " ";
@@ -591,7 +593,7 @@ void ft_map()
             cout << " is not an element of mymap.\n";
         }
     }
-    cout << "\033[32mlookup find" << endl;
+    cout << "\033[32mlookup find\033[0m" << endl;
     {
         ft::map<int, int> map;
         map[10] = 10;

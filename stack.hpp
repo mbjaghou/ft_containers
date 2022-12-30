@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:18:44 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 20:12:45 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:07:22 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <iostream>
 #include "vector.hpp"
-
+#include <deque>
+#include <list>
 namespace ft
 {
 template<class T, class Container = ft::vector<T> > 
