@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 14:28:20 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:28:01 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ class map
                 }
         };
         /*Member functions*/
-        ~map(){}
+        ~map(){clear();}
         explicit map( const Compare& comp = key_compare(), const Allocator& alloc = allocator_type() )
         {
             _alloc = alloc;
@@ -88,6 +88,7 @@ class map
         
         map& operator=( const map& other )
         {
+            // clear();
             _alloc = other._alloc;
             _size = other._size;
             _comp = other._comp;

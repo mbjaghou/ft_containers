@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:22:24 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 20:25:49 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:30:59 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,7 +378,7 @@ void ft_stack()
 
 void ft_map()
 {
-    cout << "constructing map" << endl;
+    cout << "\033[32mconstructing map\033[0m" << endl;
     {
         ft::map<char, int> map;
 
@@ -398,7 +398,7 @@ void ft_map()
             cout << it->first << " " << it->second << endl;
         }
     }
-    cout << "iterator begin , end" << endl;
+    cout << "\033[32miterator begin , end\033[0m" << endl;
     {
         ft::map<int, int> map;
 
@@ -413,7 +413,7 @@ void ft_map()
         for(; be != map.end(); be++)
             cout << be->first << " " << be->second << endl;
     }
-    cout << "iterator rbegin , rend" << endl;
+    cout << "\033[32miterator rbegin , rend\033[0m" << endl;
     {
         ft::map<int, int> map;
 
@@ -426,7 +426,7 @@ void ft_map()
         for (; it != map.rend(); it++)
             cout << it->first << " " << it->second << endl;
     }
-    cout << "capacity empty, size, max size" << endl;
+    cout << "\033[32mcapacity empty, size, max size\033[0m" << endl;
     {
         ft::map<int, int> map;
 
@@ -443,7 +443,7 @@ void ft_map()
         else
             cout << "is not" << endl;
     }
-    cout << "Element access: operator[], at" << endl;
+    cout << "\033[32mElement access: operator[], at\033[0m" << endl;
     {
             ft::map<const char,int> mymap;
 
@@ -463,7 +463,7 @@ void ft_map()
             cout << "at   b=> " << map.at('b') << endl;
             cout << "at   c=> " << map.at('c') << endl;
     }
-    cout << "Modifiers insert" << endl;
+    cout << "\033[32mModifiers insert\033[0m" << endl;
     {
         ft::map<int, int> map;
         ft::map<int, int> map1;
@@ -493,7 +493,7 @@ void ft_map()
           cout << it2->first << "      "  << it2->second << endl;
 
     }
-    cout << "Modifiers erase" << endl;
+    cout << "\033[32mModifiers erase\033[0m" << endl;
     {
         ft::map<int, int> map;
 
@@ -528,7 +528,7 @@ void ft_map()
             cout << it3->first << "    " << it3->second << endl;
         cout << "is clean" << endl;
     }
-    cout << "Modifiers clear" << endl;
+    cout << "\033[32mModifiers clear\033[0m" << endl;
     {
         ft::map<char, char> map;
 
@@ -545,7 +545,7 @@ void ft_map()
             cout << it2->first << "    " << it2->second << endl;
         cout << "after clear" << endl;
     }
-    cout << "Modifiers swap" << endl;
+    cout << "\033[32mModifiers swap\033[0m" << endl;
     {
         ft::map<int, int> map;
 
@@ -574,7 +574,7 @@ void ft_map()
         for (; it != map1.end(); ++it)
             cout << it->first << "     " << it->second << endl;
     }
-    cout << "Lookup count" << endl;
+    cout << "\033[32mLookup count\033[0m" << endl;
     {
         ft::map<char, int> mymap;
         char c;
@@ -591,7 +591,7 @@ void ft_map()
             cout << " is not an element of mymap.\n";
         }
     }
-    cout << "lookup find" << endl;
+    cout << "\033[32mlookup find" << endl;
     {
         ft::map<int, int> map;
         map[10] = 10;
@@ -604,7 +604,7 @@ void ft_map()
                 cout << itr->first << '\t' << itr->second << '\n';
     }
     }
-    cout << "lookup equal_range" << endl;
+    cout << "\033[32mlookup equal_range\033[0m" << endl;
     {
         ft::map<int, int> map;
         map[10] = 10;
@@ -619,7 +619,7 @@ void ft_map()
         cout << pair.first->first << "   "  << pair.first->second << "   " 
         << pair.second->first << "   " << pair.second->second <<  endl;
     }
-    cout << "lookup lower_bound" << endl;
+    cout << "\033[32mlookup lower_bound\033[0m" << endl;
     {
         ft::map<int, int> map;
         map[10] = 10;
@@ -632,7 +632,7 @@ void ft_map()
         cout << it->first  << "    " << it->second << endl;
 
     }
-    cout << "lookup upper_bound" << endl;
+    cout << "\033[32mlookup upper_bound\033[0m" << endl;
     {
         ft::map<int, int> map;
         map[10] = 10;
@@ -644,7 +644,7 @@ void ft_map()
         ft::map<int, int>::iterator it = map.upper_bound(40);
         cout << it->first  << "    " << it->second << endl;
     }
-    cout << "Observers key_comp" << endl;
+    cout << "\033[32mObservers key_comp\033[0m" << endl;
     {
         ft::map<char, int> map;
         ft::map<char, int>::key_compare comp = map.key_comp();
@@ -664,7 +664,7 @@ void ft_map()
         } while (comp((*it++).first, l));
     
     }   
-    cout << "Observers value_comp" << endl;
+    cout << "\033[32mObservers value_comp\033[0m" << endl;
     {
         ft::map<char,int> mymap;
 
@@ -681,7 +681,7 @@ void ft_map()
             std::cout << it->first << " => " << it->second << '\n';
         } while ( mymap.value_comp()(*it++, highest) );
     }
-    cout << "Non-member functions operator" << endl;
+    cout << "\033[32mNon-member functions operator\033[0m" << endl;
     {
         ft::map<int, int> map;
         map[10] = 10;
@@ -709,7 +709,7 @@ void ft_map()
         if (map <= map1)
             cout << "operator <= " << endl;
     }
-    cout << "Non-member functions swap" << endl;
+    cout << "\033[32mNon-member functions swap\033[0m" << endl;
     {
         ft::map<int, int> map;
 
@@ -748,5 +748,5 @@ int main()
     ft_stack();
     std::cout << "\033[41mtesting map\033[0m" << std::endl;
     ft_map();
-    while (1);
+    
 }
