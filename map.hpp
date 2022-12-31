@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:51:23 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/30 16:28:01 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/31 11:03:53 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ class map
         
         map& operator=( const map& other )
         {
-            // clear();
+            clear();
+            tree.clone(other.tree.root);
             _alloc = other._alloc;
-            _size = other._size;
             _comp = other._comp;
-            tree = other.tree;
+            _size = other._size;
             return (*this);
         }
         allocator_type get_allocator() const

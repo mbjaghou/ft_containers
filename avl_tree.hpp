@@ -6,7 +6,7 @@
 /*   By: mbjaghou <mbjaghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:31:11 by mbjaghou          #+#    #+#             */
-/*   Updated: 2022/12/29 13:10:09 by mbjaghou         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:58:59 by mbjaghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ namespace ft
             avlnode(const avlnode &obj){ *this = obj;}
             avlnode &operator=(const avlnode &obj)
             {
+                if (element)
+                    alloc.deallocate(element, 1);
                 element = alloc.allocate(1);
                 alloc.construct(element, *obj.element);
                 left = obj.left;
@@ -74,7 +76,6 @@ namespace ft
                 }
                 avl &operator=(const avl &obj)
                 {
-                     
                     root = obj.root;
                     _comp = obj._comp;
                     alloc = obj.alloc;
@@ -121,9 +122,9 @@ namespace ft
                     if (root != NULL)
                     {
                         preOrder(root->left);
-                        alloc.destroy(root->element);
+                        alloc.deallocate(root->element, 1);
                         preOrder(root->right);
-                        alloc.destroy(root->element);
+                        _Alloc_type.deallocate(root, 1);
                         root = NULL;
                     }
                 }
@@ -330,6 +331,14 @@ namespace ft
                 {
                     return _Alloc_type.max_size();
                 }
+                void clone( avlnode<T, AL> *node) {
+                if (!node)
+                    return ;
+                clone(node->left);
+                if (node->element)
+                    insert(*(node->element));
+                clone(node->right);
+            }
         };
 }
 #endif
