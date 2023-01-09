@@ -146,8 +146,6 @@ namespace ft
 			    {
 			    	if (!node )
 			    		return (node);
-			    	if (node->element && node->element->first == key.first)
-			    		return (node);
 			    	if (_comp(key.first, node->element->first))
 			    		return (search(node->left, key));
 			    	else if (_comp(node->element->first, key.first))
