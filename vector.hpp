@@ -183,11 +183,11 @@ class vector
             size_t o = ft::distance(position, end());
             vector<value_type> tmp;
             tmp.assign(position, end());
-            for (size_t i = 0; i < _size; ++i)
+            for (size_t i = o; i < _size; ++i)
                 _alloc.destroy(p + i);
             _size -= o;
             push_back(val);
-            for(size_t i = 0; i < tmp.size(); ++i, ++_size)
+            for(size_t i = o; i < tmp.size(); ++i, ++_size)
                 _alloc.construct(p + _size, tmp[i]);
             return (position);
         }
